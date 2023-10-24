@@ -1,6 +1,7 @@
 package uz.gita.lesson40.presentation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -38,10 +39,14 @@ class SignInScreen : Fragment(R.layout.sign_in_screen) {
         Toast.makeText(requireContext(), "Verifyni och", Toast.LENGTH_SHORT).show()
     }
 
+
     private val errorLiveDataObserver: Observer<Int> = Observer { error ->
         when (error) {
-            ErrorCodes.PHONE_NUMBER -> Toast.makeText(requireContext(), "nomer", Toast.LENGTH_SHORT).show()
-            ErrorCodes.PASSWORD -> Toast.makeText(requireContext(), "password", Toast.LENGTH_SHORT).show()
+            ErrorCodes.PHONE_NUMBER ->{
+                Log.d("aa", "kkk: ")
+                Toast.makeText(requireContext(), "nomer", Toast.LENGTH_SHORT).show()
+            }
+            ErrorCodes.PASSWORD -> Toast.makeText(requireContext(), "password dj", Toast.LENGTH_SHORT).show()
 
                 //binding.password.error = "Noto'g'ri"
         }

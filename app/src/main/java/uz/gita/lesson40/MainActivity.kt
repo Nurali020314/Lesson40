@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import dagger.hilt.android.AndroidEntryPoint
 import uz.gita.lesson40.presentation.SignInScreen
+import uz.gita.lesson40.presentation.ui.VerivyAccaunt
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -11,6 +12,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction().replace(R.id.container,SignInScreen()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.container,VerivyAccaunt()).commit()
     }
 }
