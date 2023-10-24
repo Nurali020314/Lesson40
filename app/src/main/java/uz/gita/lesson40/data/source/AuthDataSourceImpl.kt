@@ -2,6 +2,8 @@ package uz.gita.lesson40.data.source
 
 import uz.gita.lesson40.data.api.AuthApi
 import uz.gita.lesson40.data.settings.Settings
+import uz.gita.lesson40.domain.entity.SignInEntity
+import uz.gita.lesson40.domain.entity.SignInResponse
 import uz.gita.lesson40.domain.entity.SignUpEntity
 import uz.gita.lesson40.domain.entity.SignUpResponse
 import javax.inject.Inject
@@ -20,7 +22,17 @@ class AuthDataSourceImpl @Inject constructor(
             settings.code = value
         }
 
+    override var signInToken: String?
+        get() = settings.sigInToken
+        set(value) {
+            settings.sigInToken = value
+        }
+
     override suspend fun signUp(signUpEntity: SignUpEntity): SignUpResponse {
         return authApi.signUp(signUpEntity)
+    }
+
+    override suspend fun signIn(signInEntity: SignInEntity): SignInResponse {
+       return authApi.signIn(signInEntity)
     }
 }

@@ -1,6 +1,8 @@
 package uz.gita.lesson40.data.repository
 
 import uz.gita.lesson40.data.source.AuthDataSource
+import uz.gita.lesson40.domain.entity.SignInEntity
+import uz.gita.lesson40.domain.entity.SignInResponse
 import uz.gita.lesson40.domain.entity.SignUpEntity
 import uz.gita.lesson40.domain.entity.SignUpResponse
 import javax.inject.Inject
@@ -18,8 +20,17 @@ class AuthRepositoryImpl @Inject constructor(
         set(value) {
             authDataSource.code = value
         }
+    override var signInToken: String?
+        get() = authDataSource.signInToken
+        set(value) {
+            authDataSource.signInToken = value
+        }
 
     override suspend fun signUp(signUpEntity: SignUpEntity): SignUpResponse {
         return authDataSource.signUp(signUpEntity)
+    }
+
+    override suspend fun SignIn(signInEntity: SignInEntity): SignInResponse {
+        return authDataSource.signIn(signInEntity)
     }
 }

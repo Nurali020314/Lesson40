@@ -13,4 +13,8 @@ class SettingsImpl @Inject constructor(@ApplicationContext context: Context) : S
     override var code: String?
         get() = preferences.getString("code", null)
         set(value) = preferences.edit().putString("code", value).apply()
+
+    override var sigInToken: String?
+        get() = preferences.getString("signIn", null)
+        set(value) = preferences.edit().putString("signIn", value).apply()
 }
