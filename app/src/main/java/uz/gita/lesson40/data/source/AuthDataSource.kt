@@ -1,5 +1,6 @@
 package uz.gita.lesson40.data.source
 
+import retrofit2.Response
 import uz.gita.lesson40.domain.entity.SignInEntity
 import uz.gita.lesson40.domain.entity.SignInResponse
 import uz.gita.lesson40.domain.entity.SignUpEntity
@@ -11,5 +12,5 @@ interface AuthDataSource {
     var signInToken:String?
 
     suspend fun signUp(signUpEntity: SignUpEntity): SignUpResponse
-    suspend fun signIn(signInEntity: SignInEntity): SignInResponse
+    suspend fun signIn(signInEntity: SignInEntity): Response<SignInResponse>
 }

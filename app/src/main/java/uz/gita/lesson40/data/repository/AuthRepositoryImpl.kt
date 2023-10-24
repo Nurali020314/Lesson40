@@ -1,5 +1,6 @@
 package uz.gita.lesson40.data.repository
 
+import retrofit2.Response
 import uz.gita.lesson40.data.source.AuthDataSource
 import uz.gita.lesson40.domain.entity.SignInEntity
 import uz.gita.lesson40.domain.entity.SignInResponse
@@ -30,7 +31,7 @@ class AuthRepositoryImpl @Inject constructor(
         return authDataSource.signUp(signUpEntity)
     }
 
-    override suspend fun SignIn(signInEntity: SignInEntity): SignInResponse {
+    override suspend fun SignIn(signInEntity: SignInEntity): Response<SignInResponse> {
         return authDataSource.signIn(signInEntity)
     }
 }
