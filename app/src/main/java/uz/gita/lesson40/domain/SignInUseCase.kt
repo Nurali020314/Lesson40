@@ -10,11 +10,11 @@ import java.io.IOException
 import javax.inject.Inject
 
 class SignInUseCase @Inject constructor(val authRepository: AuthRepository) {
+
     suspend operator fun invoke(password: String?, phone: String?): State {
 
         if (password == null || password.length < 4) return State.Error(ErrorCodes.PASSWORD)
         if (phone == null || phone.length != 13) return State.Error(ErrorCodes.PHONE_NUMBER)
-
         try {
             val entity = SignInEntity(password, phone)
             val response = authRepository.SignIn(entity)

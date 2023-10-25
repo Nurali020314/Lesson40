@@ -3,8 +3,7 @@ package uz.gita.lesson40
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import dagger.hilt.android.AndroidEntryPoint
-import uz.gita.lesson40.presentation.SignInScreen
-import uz.gita.lesson40.presentation.ui.VerivyAccaunt
+import uz.gita.lesson40.presentation.Splash
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -12,6 +11,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction().replace(R.id.container,VerivyAccaunt()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.container,Splash()).commit()
     }
 }
