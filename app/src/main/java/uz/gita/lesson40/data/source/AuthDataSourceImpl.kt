@@ -6,6 +6,8 @@ import uz.gita.lesson40.data.settings.Settings
 import uz.gita.lesson40.domain.entity.SignInEntity
 import uz.gita.lesson40.domain.entity.SignInResponse
 import uz.gita.lesson40.domain.entity.SignUpEntity
+import uz.gita.lesson40.domain.entity.SignUpResentEntity
+import uz.gita.lesson40.domain.entity.SignUpResentResponse
 import uz.gita.lesson40.domain.entity.SignUpResponse
 import javax.inject.Inject
 
@@ -17,7 +19,17 @@ class AuthDataSourceImpl @Inject constructor(
         set(value) {
             settings.temporaryToken = value
         }
+    override var temporaryTokenResent: String?
+        get() = settings.temporaryToken
+        set(value) {
+            settings.temporaryToken = value
+        }
     override var code: String?
+        get() = settings.code
+        set(value) {
+            settings.code = value
+        }
+    override var codeResent: String?
         get() = settings.code
         set(value) {
             settings.code = value
@@ -34,6 +46,10 @@ class AuthDataSourceImpl @Inject constructor(
     }
 
     override suspend fun signIn(signInEntity: SignInEntity): Response<SignInResponse> {
-       return authApi.signIn(signInEntity)
+        return authApi.signIn(signInEntity)
+    }
+
+    override suspend fun signUpResent(signUpResentEntity: SignUpResentEntity): Response<SignUpResentResponse> {
+        return authApi.signUpResent(signUpResentEntity)
     }
 }

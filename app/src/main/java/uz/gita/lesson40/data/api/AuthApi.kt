@@ -6,6 +6,8 @@ import retrofit2.http.POST
 import uz.gita.lesson40.domain.entity.SignInEntity
 import uz.gita.lesson40.domain.entity.SignInResponse
 import uz.gita.lesson40.domain.entity.SignUpEntity
+import uz.gita.lesson40.domain.entity.SignUpResentEntity
+import uz.gita.lesson40.domain.entity.SignUpResentResponse
 import uz.gita.lesson40.domain.entity.SignUpResponse
 
 interface AuthApi {
@@ -14,6 +16,9 @@ interface AuthApi {
 
     @POST("auth/sign-in")
     suspend fun signIn(@Body signInEntity: SignInEntity): Response<SignInResponse>
+
+    @POST("sign-up/resend")
+    suspend fun signUpResent(@Body signUpResentEntity: SignUpResentEntity): Response<SignUpResentResponse>
 
 
 
