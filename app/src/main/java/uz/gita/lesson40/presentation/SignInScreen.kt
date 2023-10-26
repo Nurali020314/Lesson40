@@ -20,18 +20,36 @@ class SignInScreen : Fragment(R.layout.sign_in_screen) {
     private val binding: SignInScreenBinding by viewBinding()
     private val viewModel: SignInviewModel by viewModels()
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.openVerifyLiveData.observe(viewLifecycleOwner, openVerifyLiveDataObserver)
         viewModel.errorLiveData.observe(viewLifecycleOwner, errorLiveDataObserver)
         viewModel.noNetworkLiveData.observe(viewLifecycleOwner, noNetworkLiveDataObserver)
 
+
+        binding.signUpTv.setOnClickListener {
+            parentFragmentManager.beginTransaction().replace(R.id.container, RegisterFragment())
+                .addToBackStack("sinUp").commit()
+        }
+
         binding.signin.setOnClickListener {
 
             val phone = binding.phone.text?.toString()
             val password = binding.password.text?.toString()
             viewModel.signIn(password, phone)
+        }
+
+        binding.lay1.setOnClickListener {
+            binding.apply {
+                lay1.setBackgroundResource(R.drawable.button1_sign_in_continue)
+                lay2.setBackgroundResource(R.drawable.button2_sign_in_continue)
+            }
+        }
+        binding.lay2.setOnClickListener {
+            binding.apply {
+                lay1.setBackgroundResource(R.drawable.button2_sign_in_continue)
+                lay2.setBackgroundResource(R.drawable.button1_sign_in_continue)
+            }
         }
     }
 
@@ -42,13 +60,18 @@ class SignInScreen : Fragment(R.layout.sign_in_screen) {
 
     private val errorLiveDataObserver: Observer<Int> = Observer { error ->
         when (error) {
-            ErrorCodes.PHONE_NUMBER ->{
+            ErrorCodes.PHONE_NUMBER -> {
                 Log.d("aa", "kkk: ")
                 Toast.makeText(requireContext(), "nomer", Toast.LENGTH_SHORT).show()
             }
-            ErrorCodes.PASSWORD -> Toast.makeText(requireContext(), "password dj", Toast.LENGTH_SHORT).show()
 
-                //binding.password.error = "Noto'g'ri"
+            ErrorCodes.PASSWORD -> Toast.makeText(
+                requireContext(),
+                "password dj",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            //binding.password.error = "Noto'g'ri"
         }
     }
 
