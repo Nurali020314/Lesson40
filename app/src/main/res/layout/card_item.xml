@@ -2,7 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="350dp"
+
+    android:layout_marginHorizontal="10dp"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
@@ -34,17 +36,19 @@
                     android:src="@drawable/img_card" />
 
                 <TextView
+
                     android:layout_marginHorizontal="12dp"
-                    android:id="@+id/textView2"
+                    android:id="@+id/card_nomer"
                     android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="**** 2236" />
                 <TextView
+                    android:id="@+id/data"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="02/24"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:gravity="end"
                     />
 
@@ -62,7 +66,7 @@
 
                     />
                 <TextView
-
+                    android:id="@+id/balance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$ 5 300.00"
