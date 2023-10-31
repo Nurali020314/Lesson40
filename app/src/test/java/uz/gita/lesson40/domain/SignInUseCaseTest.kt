@@ -9,7 +9,10 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito
+import retrofit2.Response
+import uz.gita.lesson40.data.constants.State
 import uz.gita.lesson40.data.repository.AuthRepository
+import uz.gita.lesson40.domain.entity.SignInResponse
 import uz.gita.lesson40.presentation.SignInviewModel
 
 
@@ -24,12 +27,22 @@ class SignInUseCaseTest {
     }
 
     @Test
-    fun signInUseCase_test()= runTest {
-          signInUseCase.invoke("Nz214214","+998940314314")
+    fun signInUseCase_test() = runTest {
+
+        val token = "token"
+
+       // Mockito.`when`(authRepository.SignIn(any())).thenReturn(Response)
+
+        signInUseCase.invoke("Nz214214", "+998940304314")
+
+        Mockito.verify(authRepository, Mockito.times(1)).signInToken = token
+
     }
 
     @After
     fun teardown() {
         Dispatchers.resetMain()
     }
+
+    private fun <T> any(): T = Mockito.any()
 }

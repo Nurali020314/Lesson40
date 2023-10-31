@@ -56,6 +56,7 @@ class SignInviewModelTest {
             .thenReturn(State.Error(404))
 
         signInviewModel.signIn("123456", "+998940214314")
+
         runCurrent()
 
 

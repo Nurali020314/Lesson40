@@ -20,7 +20,6 @@ class SignInUseCase @Inject constructor(val authRepository: AuthRepository) {
             val entity = SignInEntity(password, phone)
             val response = authRepository.SignIn(entity)
 
-
             if (response.code() == 422) {
 
                 return State.Error(ErrorCodes.PASSWORD)
