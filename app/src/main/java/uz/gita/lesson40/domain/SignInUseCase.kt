@@ -11,6 +11,7 @@ import javax.inject.Inject
 
 class SignInUseCase @Inject constructor(val authRepository: AuthRepository) {
 
+
     suspend operator fun invoke(password: String?, phone: String?): State {
 
         if (password == null || password.length < 4) return State.Error(ErrorCodes.PASSWORD)
@@ -28,7 +29,6 @@ class SignInUseCase @Inject constructor(val authRepository: AuthRepository) {
             val body = response.body() as SignInResponse
             authRepository.signInToken = body.access_token
             Log.d("tagg", "${body.access_token} ")
-
 
 
         } catch (exception: Exception) {
