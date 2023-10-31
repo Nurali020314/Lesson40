@@ -20,12 +20,13 @@ class SignInUseCase @Inject constructor(val authRepository: AuthRepository) {
             val entity = SignInEntity(password, phone)
             val response = authRepository.SignIn(entity)
 
-            if (response.code() == 422) {
 
-                return State.Error(ErrorCodes.PASSWORD)
-
-            }
-            val body = response.body() as SignInResponse
+//            if (response.code() == 422) {
+//
+//                return State.Error(ErrorCodes.PASSWORD)
+//
+//            }
+            val body = response
             authRepository.signInToken = body.access_token
             Log.d("tagg", "${body.access_token} ")
 

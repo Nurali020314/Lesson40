@@ -15,7 +15,7 @@ interface AuthApi {
     suspend fun signUp(@Body signUpEntity: SignUpEntity): SignUpResponse
 
     @POST("auth/sign-in")
-    suspend fun signIn(@Body signInEntity: SignInEntity): Response<SignInResponse>
+    suspend fun signIn(@Body signInEntity: SignInEntity): SignInResponse
 
     @POST("sign-up/resend")
     suspend fun signUpResent(@Body signUpResentEntity: SignUpResentEntity): Response<SignUpResentResponse>

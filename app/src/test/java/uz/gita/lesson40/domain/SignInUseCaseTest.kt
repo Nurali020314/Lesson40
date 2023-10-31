@@ -12,6 +12,7 @@ import org.mockito.Mockito
 import retrofit2.Response
 import uz.gita.lesson40.data.constants.State
 import uz.gita.lesson40.data.repository.AuthRepository
+import uz.gita.lesson40.domain.entity.SignInEntity
 import uz.gita.lesson40.domain.entity.SignInResponse
 import uz.gita.lesson40.presentation.SignInviewModel
 
@@ -28,12 +29,12 @@ class SignInUseCaseTest {
 
     @Test
     fun signInUseCase_test() = runTest {
-
         val token = "token"
-
-       // Mockito.`when`(authRepository.SignIn(any())).thenReturn(Response)
-
+        Mockito.`when`(authRepository.SignIn(any())).thenReturn(SignInResponse(access_token = "token"))
         signInUseCase.invoke("Nz214214", "+998940304314")
+
+
+
 
         Mockito.verify(authRepository, Mockito.times(1)).signInToken = token
 

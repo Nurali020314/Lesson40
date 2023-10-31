@@ -17,6 +17,6 @@ interface AuthRepository {
     var signInToken: String?
 
     suspend fun signUp(signUpEntity: SignUpEntity): SignUpResponse
-    suspend fun SignIn(signInEntity: SignInEntity): Response<SignInResponse>
+    suspend fun SignIn(signInEntity: SignInEntity): SignInResponse
     suspend fun signUpResent(@Body signUpResentEntity: SignUpResentEntity): Response<SignUpResentResponse>
 }
