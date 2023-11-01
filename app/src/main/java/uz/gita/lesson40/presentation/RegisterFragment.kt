@@ -26,7 +26,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         binding.register.setOnClickListener {
             val firstName = binding.firstName.text?.toString()
             val lastName = binding.lastName.text?.toString()
-            val phone = binding.phone.text?.toString()
+            val phone = "+998"+binding.phone.text?.toString()
             val password = binding.password.text?.toString()
             viewModel.signUp(firstName, lastName, password, phone)
         }
@@ -34,15 +34,15 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private val openVerifyLiveDataObserver: Observer<Unit> = Observer {
         Toast.makeText(requireContext(), "Verifyni och", Toast.LENGTH_SHORT).show()
-        parentFragmentManager.beginTransaction().replace(R.id.container, VerivyAccaunt()).commit()
+        parentFragmentManager.beginTransaction().replace(R.id.container, VerivyAccaunt()).addToBackStack("tonext").commit()
     }
 
     private val errorLiveDataObserver: Observer<Int> = Observer { error ->
         when (error) {
-            ErrorCodes.FIRST_NAME_ERROR -> binding.firstName.error = "Noto'g'ri"
-            ErrorCodes.LAST_NAME_ERROR -> binding.lastName.error = "Noto'g'ri"
-            ErrorCodes.PHONE_NUMBER -> binding.phone.error = "Noto'g'ri"
-            ErrorCodes.PASSWORD -> binding.password.error = "Noto'g'ri"
+            ErrorCodes.FIRST_NAME_ERROR -> binding.firstName.error = "Incorrect"
+            ErrorCodes.LAST_NAME_ERROR -> binding.lastName.error = "Incorrect"
+            ErrorCodes.PHONE_NUMBER -> binding.phone.error = "Incorrect"
+            ErrorCodes.PASSWORD -> binding.password.error = "Incorrect"
         }
     }
 
