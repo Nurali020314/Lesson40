@@ -39,7 +39,14 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private val errorLiveDataObserver: Observer<Int> = Observer { error ->
         when (error) {
-            ErrorCodes.FIRST_NAME_ERROR -> binding.firstName.error = "Incorrect"
+            ErrorCodes.FIRST_NAME_ERROR -> {
+                if(binding.firstName.text.toString().length>=3){
+                    Toast.makeText(requireContext(), "This number already exist", Toast.LENGTH_SHORT).show()
+                }else{
+                    binding.firstName.error = "Incorrect"
+                }
+
+            }
             ErrorCodes.LAST_NAME_ERROR -> binding.lastName.error = "Incorrect"
             ErrorCodes.PHONE_NUMBER -> binding.phone.error = "Incorrect"
             ErrorCodes.PASSWORD -> binding.password.error = "Incorrect"

@@ -19,16 +19,12 @@ class SignInviewModel @Inject constructor(
     private val signInUseCase: SignInUseCase
 ) : ViewModel() {
 
-
-    private val _openVerifyFlow = MutableSharedFlow<Unit>()
-    val openVerifyFlow: SharedFlow<Unit> = _openVerifyFlow
-
-    private val _errorFlow = MutableStateFlow(0)
-    val errorFlow: StateFlow<Int> = _errorFlow
-
-
-    private val _noNetworkFlow = MutableSharedFlow<Unit>()
-    val noNetworkFlow: SharedFlow<Unit> = _noNetworkFlow
+    private val _openVerifyLiveData = MutableLiveData<Unit>()
+    val openVerifyLiveData: LiveData<Unit> get() = _openVerifyLiveData
+    private val _errorLiveData = MutableLiveData<Int>()
+    val errorLiveData: LiveData<Int> get() = _errorLiveData
+    private val _noNetworkLiveData = MutableLiveData<Unit>()
+    val noNetworkLiveData: LiveData<Unit> get() = _noNetworkLiveData
 
 
     fun signIn(password: String?, phone: String?) {
@@ -40,9 +36,9 @@ class SignInviewModel @Inject constructor(
 
     private suspend fun handleState(state: State) {
         when (state) {
-            is State.Success<*> -> _openVerifyFlow.emit(Unit)
-            is State.Error -> _errorFlow.emit(state.code)
-            State.NoNetwork -> _noNetworkFlow.emit(Unit)
+            is State.Success<*> -> _openVerifyLiveData.postValue(Unit)
+            is State.Error -> _errorLiveData.postValue(state.code)
+            State.NoNetwork -> _noNetworkLiveData.postValue(Unit)
         }
 
     }

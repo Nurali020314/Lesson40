@@ -21,9 +21,9 @@ class SignUpResendViewModel @Inject constructor(
     val noNetworkLiveData: LiveData<Unit> get() = _noNetworkLiveData
 
 
-    fun signIn(password: String?, phone: String?) {
+    fun signIn(password: String) {
         viewModelScope.launch {
-            val state = signUpResentUseCase(password, phone)
+            val state = signUpResentUseCase(password)
             handleState(state)
         }
     }

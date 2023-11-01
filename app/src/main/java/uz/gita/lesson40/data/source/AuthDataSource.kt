@@ -17,7 +17,7 @@ interface AuthDataSource {
     var signInToken:String?
 
     suspend fun signUp(signUpEntity: SignUpEntity): SignUpResponse
-    suspend fun signIn(signInEntity: SignInEntity): SignInResponse
+    suspend fun signIn(signInEntity: SignInEntity): Response<SignInResponse>
     suspend fun signUpResent(@Body signUpResentEntity: SignUpResentEntity): Response<SignUpResentResponse>
 
 }
