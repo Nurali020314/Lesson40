@@ -45,7 +45,7 @@ class AuthRepositoryImpl @Inject constructor(
         return authDataSource.signUp(signUpEntity)
     }
 
-    override suspend fun SignIn(signInEntity: SignInEntity): SignInResponse {
+    override suspend fun SignIn(signInEntity: SignInEntity): Response<SignInResponse> {
         return authDataSource.signIn(signInEntity)
     }
 

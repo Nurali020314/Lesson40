@@ -11,23 +11,22 @@ import uz.gita.lesson40.R
 import uz.gita.lesson40.data.settings.SettingsImpl
 import uz.gita.lesson40.databinding.SignInScreenBinding
 import uz.gita.lesson40.databinding.VerificationScreenBinding
+import uz.gita.lesson40.domain.SignUpUseCase
 import uz.gita.lesson40.presentation.RegisterViewModel
 import uz.gita.lesson40.presentation.SignUpResendViewModel
 
 class VerivyAccaunt : Fragment(R.layout.verification_screen) {
     val settingsImpl: SettingsImpl by lazy { SettingsImpl(requireContext()) }
     private val viewModel: SignUpResendViewModel by viewModels()
-
     private val binding: VerificationScreenBinding by viewBinding()
 
-    private lateinit var countDownTimer: CountDownTimer
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         var secound = 60
 
         Toast.makeText(requireContext(), "${settingsImpl.code}", Toast.LENGTH_SHORT).show()
-      countDownTimer=object : CountDownTimer(60000, 1000) {
+        object : CountDownTimer(60000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 --secound
 
@@ -72,16 +71,15 @@ class VerivyAccaunt : Fragment(R.layout.verification_screen) {
 
 
         binding.resent2.setOnClickListener {
-            viewModel.signIn("nnkc", "dncnd")
+            viewModel.signIn(settingsImpl.sigInToken.toString())
         }
-
 
 
     }
 
     override fun onStop() {
         super.onStop()
-        countDownTimer.cancel()
+
     }
 
 }
