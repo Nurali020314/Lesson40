@@ -4,5 +4,5 @@ interface Settings {
     var temporaryToken: String?
     var code: String?
     var sigInToken:String?
-    var screenPassword:Int
+    var screenPassword:String?
 }
