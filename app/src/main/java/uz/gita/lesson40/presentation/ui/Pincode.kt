@@ -9,12 +9,19 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import uz.gita.lesson40.R
+import uz.gita.lesson40.data.settings.Settings
 import uz.gita.lesson40.databinding.AccountPincodeBinding
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class PinCode : Fragment(R.layout.account_pincode) {
+    @Inject
+    lateinit var settings : Settings
     private val binding: AccountPincodeBinding by viewBinding()
     private var input: String = ""
+    private var isCreating = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         reset()
@@ -22,6 +29,7 @@ class PinCode : Fragment(R.layout.account_pincode) {
     }
 
     private fun reset() {
+        isCreating = settings.screenPassword.isNullOrEmpty()
         for (i in 0 until binding.tv2.childCount) {
             val img = binding.tv2.getChildAt(i) as ImageView
             img.setImageResource(R.drawable.empty)
@@ -42,7 +50,15 @@ class PinCode : Fragment(R.layout.account_pincode) {
                         img.setImageResource(R.drawable.full)
                         input += text.text
                     }
-                    Toast.makeText(requireContext(), input, Toast.LENGTH_SHORT).show()
+                    if (input.length == 4){
+                        if (isCreating)
+                            settings.screenPassword = input
+                        else if (input == settings.screenPassword) {
+                            Toast.makeText(requireContext(), "True", Toast.LENGTH_SHORT).show()
+                            parentFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container, Home()).commit()
+                        }
+                        else Toast.makeText(requireContext(), "False", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }

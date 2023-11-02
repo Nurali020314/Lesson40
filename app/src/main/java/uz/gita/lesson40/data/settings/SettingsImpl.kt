@@ -17,8 +17,16 @@ class SettingsImpl @Inject constructor(@ApplicationContext context: Context) : S
     override var sigInToken: String?
         get() = preferences.getString("signIn", null)
         set(value) = preferences.edit().putString("signIn", value).apply()
-    override var screenPassword: Int
-        get() = preferences.getInt("password",0)
-        set(value) =preferences.edit().putInt("password",value).apply()
+    override var screenPassword: String?
+        get() = preferences.getString("password",null)
+        set(value) =preferences.edit().putString("password",value).apply()
 
+
+    override var policy: Int
+        get() = preferences.getInt("policy",-1)
+        set(value) =preferences.edit().putInt("policy",value).apply()
+
+    override var auth: Int
+        get() = preferences.getInt("auth",-1)
+        set(value) =preferences.edit().putInt("auth",value).apply()
 }
