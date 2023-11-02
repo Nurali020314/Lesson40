@@ -5,13 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import uz.gita.lesson40.R
 import uz.gita.lesson40.domain.entity.CardEntity
+import uz.gita.lesson40.domain.entity.getResponse.Data
 
-class CardAdapter : ListAdapter<CardEntity, CardViewHolder>(CharacterComparator){
+class CardAdapter : ListAdapter<Data, CardViewHolder>(CharacterComparator){
     private var onClickListener: ((Int) -> Unit)? = null
 
     fun setOnClickClickListener(clickListener: (Int) -> Unit) {
@@ -29,13 +31,13 @@ class CardAdapter : ListAdapter<CardEntity, CardViewHolder>(CharacterComparator)
         character?.let { holder.bind(it) }
     }
 
-    object CharacterComparator : DiffUtil.ItemCallback<CardEntity>() {
-        override fun areItemsTheSame(oldItem: CardEntity, newItem: CardEntity): Boolean {
+    object CharacterComparator : DiffUtil.ItemCallback<Data>() {
+        override fun areItemsTheSame(oldItem: Data, newItem: Data): Boolean {
             return oldItem.id == newItem.id
         }
 
         @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: CardEntity, newItem: CardEntity): Boolean {
+        override fun areContentsTheSame(oldItem: Data, newItem: Data): Boolean {
             return oldItem == newItem
         }
     }
@@ -43,10 +45,13 @@ class CardAdapter : ListAdapter<CardEntity, CardViewHolder>(CharacterComparator)
 
 class CardViewHolder(val view: View, val onClickListener: ((Int) -> Unit)?) :
     RecyclerView.ViewHolder(view) {
+    init {
+        val findViewById = view.findViewById<CardView>(R.id.laout)
+        findViewById.setOnClickListener { onClickListener }
+    }
     private val name: TextView = view.findViewById(R.id.balance)
 
-
-    fun bind(card: CardEntity) {
-        name.setText("$ " + card.balance)
+    fun bind(card: Data) {
+        name.setText("$ " + card.amount)
     }
 }

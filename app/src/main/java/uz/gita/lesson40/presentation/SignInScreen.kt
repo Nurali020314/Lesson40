@@ -20,6 +20,7 @@ import uz.gita.lesson40.R
 import uz.gita.lesson40.data.constants.ErrorCodes
 import uz.gita.lesson40.databinding.FragmentRegisterBinding
 import uz.gita.lesson40.databinding.SignInScreenBinding
+import uz.gita.lesson40.presentation.ui.AddCard
 import uz.gita.lesson40.presentation.ui.Home
 
 @AndroidEntryPoint

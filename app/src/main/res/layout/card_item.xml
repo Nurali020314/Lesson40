@@ -8,6 +8,9 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/laout"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_width="350dp"
         app:cardCornerRadius="15dp"
         android:layout_height="150dp"

@@ -163,7 +163,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/submit"
         android:layout_marginHorizontal="16dp"
         android:background="@drawable/button_primary"
         android:layout_width="match_parent"
