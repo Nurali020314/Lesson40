@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import uz.gita.lesson40.R
 import uz.gita.lesson40.data.constants.ErrorCodes
+import uz.gita.lesson40.data.settings.SettingsImpl
 import uz.gita.lesson40.databinding.FragmentRegisterBinding
 import uz.gita.lesson40.databinding.SignInScreenBinding
 import uz.gita.lesson40.presentation.ui.Home
@@ -25,6 +26,7 @@ import uz.gita.lesson40.presentation.ui.PinCode
 
 @AndroidEntryPoint
 class SignInScreen : Fragment(R.layout.sign_in_screen) {
+    private val settingsImpl: SettingsImpl by lazy { SettingsImpl(requireContext()) }
     private val binding: SignInScreenBinding by viewBinding()
     private val viewModel: SignInviewModel by viewModels()
 
@@ -78,6 +80,7 @@ class SignInScreen : Fragment(R.layout.sign_in_screen) {
 
     private val openVerifyLiveDataObserver: Observer<Unit> = Observer {
         parentFragmentManager.beginTransaction().replace(R.id.container, PinCode()).commit()
+        settingsImpl.auth=1
     }
 
 

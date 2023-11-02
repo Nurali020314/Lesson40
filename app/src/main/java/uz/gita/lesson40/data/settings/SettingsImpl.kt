@@ -21,4 +21,12 @@ class SettingsImpl @Inject constructor(@ApplicationContext context: Context) : S
         get() = preferences.getString("password",null)
         set(value) =preferences.edit().putString("password",value).apply()
 
+
+    override var policy: Int
+        get() = preferences.getInt("policy",-1)
+        set(value) =preferences.edit().putInt("policy",value).apply()
+
+    override var auth: Int
+        get() = preferences.getInt("auth",-1)
+        set(value) =preferences.edit().putInt("auth",value).apply()
 }

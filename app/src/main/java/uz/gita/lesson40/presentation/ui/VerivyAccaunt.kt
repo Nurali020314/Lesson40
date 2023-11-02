@@ -69,6 +69,14 @@ class VerivyAccaunt : Fragment(R.layout.verification_screen) {
 
         }.start()
 
+        binding.proced.setOnClickListener {
+            if(secound<45){
+                parentFragmentManager.beginTransaction().replace(R.id.container,Home()).commit()
+                settingsImpl.auth=1
+
+            }
+        }
+
 
         binding.resent2.setOnClickListener {
             viewModel.signIn(settingsImpl.sigInToken.toString())

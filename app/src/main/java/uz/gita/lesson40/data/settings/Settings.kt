@@ -5,4 +5,6 @@ interface Settings {
     var code: String?
     var sigInToken:String?
     var screenPassword:String?
+    var policy:Int
+    var auth:Int
 }
