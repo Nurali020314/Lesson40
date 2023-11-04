@@ -13,5 +13,6 @@ class TransferFragment : Fragment(R.layout.fragment_transfer) {
         binding.back.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
+
     }
 }

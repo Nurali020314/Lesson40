@@ -29,7 +29,7 @@ class AddCard:Fragment(R.layout.fragment_add_card) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         biding.apply {
             back.setOnClickListener {
-                parentFragmentManager.beginTransaction().replace(R.id.container,Home()).commit()
+                requireActivity().onBackPressedDispatcher.onBackPressed()
             }
             submit.setOnClickListener{
                 if (biding.eDate.text.length==5){

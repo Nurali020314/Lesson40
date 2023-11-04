@@ -45,13 +45,13 @@ class CardAdapter : ListAdapter<Data, CardViewHolder>(CharacterComparator){
 
 class CardViewHolder(val view: View, val onClickListener: ((Int) -> Unit)?) :
     RecyclerView.ViewHolder(view) {
-    init {
-        val findViewById = view.findViewById<CardView>(R.id.laout)
-        findViewById.setOnClickListener { onClickListener }
-    }
     private val name: TextView = view.findViewById(R.id.balance)
+    private val layout: CardView = view.findViewById(R.id.layout)
 
     fun bind(card: Data) {
         name.setText("$ " + card.amount)
+        layout.setOnClickListener {
+            onClickListener?.invoke(bindingAdapterPosition)
+        }
     }
 }

@@ -1,4 +1,4 @@
-package uz.gita.lesson40.data.source
+package uz.gita.lesson40.data.datasource
 
 import retrofit2.Response
 import retrofit2.http.Body

@@ -4,8 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import uz.gita.lesson40.data.source.AuthDataSource
-import uz.gita.lesson40.data.source.AuthDataSourceImpl
+import uz.gita.lesson40.data.datasource.AuthDataSource
+import uz.gita.lesson40.data.datasource.AuthDataSourceImpl
 
 @Module
 @InstallIn(SingletonComponent::class)

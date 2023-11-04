@@ -9,12 +9,10 @@ import uz.gita.lesson40.domain.entity.getResponse.GetCardsesponse
 import javax.inject.Inject
 
 class GetCardUseCase @Inject constructor(private val repository:CardsRepository,private val settings: Settings) {
-    private lateinit var getCard:GetCardsesponse
     suspend operator fun invoke():State{
 
         try {
             val cards = repository.getCards("Bearer ${settings.sigInToken}")
-
             val data = cards.data
             return State.Success(cards.data)
 

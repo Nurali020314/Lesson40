@@ -21,7 +21,12 @@ class HomeViewModel @Inject constructor(private val getCardUseCase: GetCardUseCa
 
     private val _openNetworkFlow = MutableSharedFlow<Unit>()
     val openNetworkFlow:SharedFlow<Unit> =_openNetworkFlow
-
+    init {
+        viewModelScope.launch {
+            val state=getCardUseCase.invoke()
+            handleState(state)
+        }
+    }
     fun getCards(){
         viewModelScope.launch {
             val state=getCardUseCase.invoke()

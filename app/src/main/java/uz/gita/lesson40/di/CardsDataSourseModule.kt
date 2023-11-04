@@ -4,12 +4,12 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import uz.gita.lesson40.data.source.CardsDataSourse
-import uz.gita.lesson40.data.source.CardsDataSourseImpl
+import uz.gita.lesson40.data.datasource.CardsDataSourceImpl
+import uz.gita.lesson40.data.datasource.CardsDataSourse
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface CardsDataSourseModule {
+interface CardsDataSourceModule {
     @Binds
-    fun bind(cardsDataSourseImpl: CardsDataSourseImpl):CardsDataSourse
+    fun bind(cardsDataSourceImpl: CardsDataSourceImpl):CardsDataSourse
 }

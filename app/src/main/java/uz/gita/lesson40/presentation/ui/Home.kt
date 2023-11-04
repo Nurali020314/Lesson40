@@ -25,72 +25,56 @@ import uz.gita.lesson40.presentation.adapter.CardAdapter
 class Home : Fragment(R.layout.fragment_home) {
     private val biding: FragmentHomeBinding by viewBinding()
     private val viewModel: HomeViewModel by viewModels()
-    private lateinit var dataList: ArrayList<Data>
-    private lateinit var adapter: CardAdapter
+    private val dataList: ArrayList<Data> by lazy { ArrayList() }
+    private val adapter by lazy { CardAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.getCards()
-        adapter = CardAdapter()
         biding.apply {
             recycler.adapter = adapter
 
             addCard.setOnClickListener {
-                parentFragmentManager.beginTransaction().replace(R.id.container, AddCard()).commit()
+                parentFragmentManager.beginTransaction().setReorderingAllowed(true)
+                    .addToBackStack("Home").replace(R.id.container, AddCard()).commit()
             }
             pay.setOnClickListener {
-                parentFragmentManager.beginTransaction().addToBackStack("Home").replace(R.id.container, TransferFragment()).commit()
-
-//                val dialog=AlertDialog.Builder(requireContext())
-//                    .setTitle("Kartani ochirish")
-//                    .setMessage("Kartan ocirasizmi")
-//                    .setPositiveButton("OK",){dialog,_->
-//                        dataList.removeAt(dataList.size-1)
-//                        adapter.notifyItemRemoved(dataList.size-1)
-//                        adapter.notifyDataSetChanged()
-//                    }.show()
+                parentFragmentManager.beginTransaction().setReorderingAllowed(true)
+                    .addToBackStack("Home").replace(R.id.container, TransferFragment()).commit()
             }
         }
-        dataList = ArrayList()
         viewLifecycleOwner.lifecycleScope.launch {
-
-            repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                viewModel.openSuccesFlow.collect { data ->
-                    dataList.addAll(data)
-
+            viewModel.openSuccesFlow.collect { data ->
+                dataList.clear()
+                dataList.addAll(data)
+                adapter.submitList(dataList)
+                adapter.notifyDataSetChanged()
+            }
+        }
+        adapter.setOnClickClickListener { inex ->
+            val dialog = AlertDialog.Builder(requireContext())
+                .setTitle("Deleting Card")
+                .setMessage("Are you sure?")
+                .setPositiveButton("Yes") { dialog, _ ->
+                    dataList.removeAt(inex)
                     adapter.submitList(dataList)
+                }.show()
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.openErrorFlow.collect { error ->
+                if (error == 1) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Something went wrong",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
-
-
-            adapter.setOnClickClickListener { inex ->
-                val dialog = AlertDialog.Builder(requireContext())
-                    .setTitle("Kartani ochirish")
-                    .setMessage("Kartan ocirasizmi")
-                    .setPositiveButton("OK") { dialog, _ ->
-                        dataList.removeAt(inex)
-                        adapter.submitList(dataList)
-                    }.show()
-
-            }
-
-            repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                viewModel.openErrorFlow.collect { error ->
-                    if (error == 1) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Muammoni bartaraf etish kerak ",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-            }
-            repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                viewModel.openNetworkFlow.collect {
-                    Toast.makeText(requireContext(), "Internetizni yangilang", Toast.LENGTH_SHORT)
-                        .show()
-                }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.openNetworkFlow.collect {
+                Toast.makeText(requireContext(), "No Network", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
-
 }
