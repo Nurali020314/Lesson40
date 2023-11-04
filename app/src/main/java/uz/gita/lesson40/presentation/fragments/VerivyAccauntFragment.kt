@@ -1,4 +1,4 @@
-package uz.gita.lesson40.presentation.ui
+package uz.gita.lesson40.presentation.fragments
 
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -9,13 +9,10 @@ import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.gita.lesson40.R
 import uz.gita.lesson40.data.settings.SettingsImpl
-import uz.gita.lesson40.databinding.SignInScreenBinding
 import uz.gita.lesson40.databinding.VerificationScreenBinding
-import uz.gita.lesson40.domain.SignUpUseCase
-import uz.gita.lesson40.presentation.RegisterViewModel
 import uz.gita.lesson40.presentation.SignUpResendViewModel
 
-class VerivyAccaunt : Fragment(R.layout.verification_screen) {
+class VerivyAccauntFragment : Fragment(R.layout.verification_screen) {
     val settingsImpl: SettingsImpl by lazy { SettingsImpl(requireContext()) }
     private val viewModel: SignUpResendViewModel by viewModels()
     private val binding: VerificationScreenBinding by viewBinding()
@@ -71,7 +68,7 @@ class VerivyAccaunt : Fragment(R.layout.verification_screen) {
 
         binding.proced.setOnClickListener {
             if(secound<45){
-                parentFragmentManager.beginTransaction().replace(R.id.container,Home()).commit()
+                parentFragmentManager.beginTransaction().replace(R.id.container,HomeFragment()).commit()
                 settingsImpl.auth=1
 
             }

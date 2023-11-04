@@ -1,28 +1,23 @@
-package uz.gita.lesson40.presentation.ui
+package uz.gita.lesson40.presentation.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
-import android.widget.Adapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import uz.gita.lesson40.R
 import uz.gita.lesson40.databinding.FragmentHomeBinding
 import uz.gita.lesson40.domain.entity.getResponse.Data
 import uz.gita.lesson40.presentation.HomeViewModel
-import uz.gita.lesson40.presentation.TransferFragment
 import uz.gita.lesson40.presentation.adapter.CardAdapter
 
 @AndroidEntryPoint
-class Home : Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment(R.layout.fragment_home) {
     private val biding: FragmentHomeBinding by viewBinding()
     private val viewModel: HomeViewModel by viewModels()
     private val dataList: ArrayList<Data> by lazy { ArrayList() }
@@ -34,7 +29,7 @@ class Home : Fragment(R.layout.fragment_home) {
 
             addCard.setOnClickListener {
                 parentFragmentManager.beginTransaction().setReorderingAllowed(true)
-                    .addToBackStack("Home").replace(R.id.container, AddCard()).commit()
+                    .addToBackStack("Home").replace(R.id.container, AddCardFragment()).commit()
             }
             pay.setOnClickListener {
                 parentFragmentManager.beginTransaction().setReorderingAllowed(true)

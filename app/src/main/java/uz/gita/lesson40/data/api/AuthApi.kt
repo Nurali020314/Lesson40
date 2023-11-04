@@ -14,6 +14,7 @@ import uz.gita.lesson40.domain.entity.SignUpResentEntity
 import uz.gita.lesson40.domain.entity.SignUpResentResponse
 import uz.gita.lesson40.domain.entity.SignUpResponse
 import uz.gita.lesson40.domain.entity.TransferEntity
+import uz.gita.lesson40.domain.entity.TransferResponse
 import uz.gita.lesson40.domain.entity.getResponse.GetCardsesponse
 
 interface AuthApi {
@@ -33,7 +34,7 @@ interface AuthApi {
     suspend fun getCards(@Header("Authorization") bearerToken :String):GetCardsesponse
 
     @POST("transfers")
-    suspend fun transfer(@Header("Authorization") bearerToken:String, @Body transferEntity: TransferEntity): Response<String>
+    suspend fun transfer(@Header("Authorization") bearerToken:String, @Body transferEntity: TransferEntity): Response<TransferResponse>
 //    @DELETE("cards/{id}")
 //    suspend fun deleteCards(@Path("id") id: String, @Header("Authorization") bearerToken: String): Response<ResponsData>
 
