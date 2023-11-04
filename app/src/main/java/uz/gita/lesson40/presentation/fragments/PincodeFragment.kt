@@ -16,7 +16,7 @@ import uz.gita.lesson40.databinding.AccountPincodeBinding
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class PinCode : Fragment(R.layout.account_pincode) {
+class PincodeFragment : Fragment(R.layout.account_pincode) {
     @Inject
     lateinit var settings : Settings
     private val binding: AccountPincodeBinding by viewBinding()

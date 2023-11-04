@@ -69,7 +69,7 @@ class SignInScreen : Fragment(R.layout.sign_in_screen) {
     }
 
     private val openVerifyLiveDataObserver: Observer<Unit> = Observer {
-        parentFragmentManager.beginTransaction().replace(R.id.container, PinCode()).commit()
+        parentFragmentManager.beginTransaction().replace(R.id.container, PincodeFragment()).commit()
         settingsImpl.auth=1
     }
 
