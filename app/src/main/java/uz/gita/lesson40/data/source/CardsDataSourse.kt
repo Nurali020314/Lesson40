@@ -11,4 +11,5 @@ interface CardsDataSourse {
 
     suspend fun getCards(bearerToken:String):GetCardsesponse
 
+    suspend fun delete(id:String,bearerToken:String):Response<String>
 }

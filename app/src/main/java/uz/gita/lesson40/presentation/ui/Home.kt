@@ -19,6 +19,7 @@ import uz.gita.lesson40.databinding.FragmentHomeBinding
 import uz.gita.lesson40.domain.entity.getResponse.Data
 import uz.gita.lesson40.presentation.HomeViewModel
 import uz.gita.lesson40.presentation.adapter.CardAdapter
+import uz.gita.lesson40.presentation.adapter.OnItemClickListener
 
 @AndroidEntryPoint
 class Home:Fragment(R.layout.fragment_home) {
@@ -37,16 +38,24 @@ class Home:Fragment(R.layout.fragment_home) {
                 parentFragmentManager.beginTransaction().replace(R.id.container,AddCard()).commit()
             }
             pay.setOnClickListener {
+
+            }
+        }
+        adapter.setOnItemClickListener(object :OnItemClickListener{
+            override fun onItemClick(position: Int) {
                 val dialog=AlertDialog.Builder(requireContext())
                     .setTitle("Kartani ochirish")
                     .setMessage("Kartan ocirasizmi")
                     .setPositiveButton("OK",){dialog,_->
-                        dataList.removeAt(dataList.size-1)
-                        adapter.notifyItemRemoved(dataList.size-1)
+                        viewModel.deleteItem(dataList[position].id.toString())
+                        dataList.removeAt(position)
+                        adapter.notifyItemRemoved(position)
                         adapter.notifyDataSetChanged()
+
                     }.show()
             }
-        }
+
+        })
         dataList= ArrayList()
         viewLifecycleOwner.lifecycleScope.launch {
 
@@ -58,16 +67,12 @@ class Home:Fragment(R.layout.fragment_home) {
                 }
             }
 
+            repeatOnLifecycle(Lifecycle.State.RESUMED){
+                viewModel.openSuccesDeleteFlow.collect{data->
+                    Toast.makeText(requireContext(), data, Toast.LENGTH_SHORT).show()
+                    parentFragmentManager.beginTransaction().replace(R.id.container,AddCard()).commit()
 
-            adapter.setOnClickClickListener { inex->
-                val dialog=AlertDialog.Builder(requireContext())
-                    .setTitle("Kartani ochirish")
-                    .setMessage("Kartan ocirasizmi")
-                    .setPositiveButton("OK",){dialog,_->
-                        dataList.removeAt(inex)
-                        adapter.submitList(dataList)
-                    }.show()
-
+                }
             }
 
             repeatOnLifecycle(Lifecycle.State.RESUMED){

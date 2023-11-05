@@ -16,6 +16,9 @@ class CardsRepositoryImpl @Inject constructor(private val dataSourse: CardsDataS
         return dataSourse.getCards(bearerToken)
     }
 
+    override suspend fun delete(id: String, bearerToken: String): Response<String> {
+        return dataSourse.delete(id,bearerToken)
+    }
 
 
 }

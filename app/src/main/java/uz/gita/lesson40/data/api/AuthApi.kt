@@ -2,9 +2,11 @@ package uz.gita.lesson40.data.api
 
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 import uz.gita.lesson40.domain.entity.AddCardEntity
 import uz.gita.lesson40.domain.entity.CardResponse
 import uz.gita.lesson40.domain.entity.SignInEntity
@@ -31,7 +33,7 @@ interface AuthApi {
     @GET("cards")
     suspend fun getCards(@Header("Authorization") bearerToken :String):GetCardsesponse
 
-//    @DELETE("cards/{id}")
-//    suspend fun deleteCards(@Path("id") id: String, @Header("Authorization") bearerToken: String): Response<ResponsData>
+    @DELETE("cards/{id}")
+    suspend fun deleteCards(@Path("id") id: String, @Header("Authorization") bearerToken: String): Response<String>
 
 }

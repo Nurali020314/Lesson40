@@ -17,5 +17,9 @@ class CardsDataSourseImpl @Inject constructor(
         return authApi.getCards(bearerToken)
     }
 
+    override suspend fun delete(id: String, bearerToken: String): Response<String> {
+        return authApi.deleteCards(id,bearerToken)
+    }
+
 
 }
