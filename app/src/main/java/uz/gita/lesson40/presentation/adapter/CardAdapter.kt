@@ -15,6 +15,10 @@ import uz.gita.lesson40.domain.entity.getResponse.Data
 
 class CardAdapter : ListAdapter<Data, CardViewHolder>(CharacterComparator){
     private var onClickListener: ((Int) -> Unit)? = null
+        private var onItemClickListener: OnItemClickListener? = null
+        fun setOnItemClickListener(listener: OnItemClickListener) {
+            onItemClickListener = listener
+        }
 
     fun setOnClickClickListener(clickListener: (Int) -> Unit) {
         onClickListener = clickListener
@@ -23,7 +27,7 @@ class CardAdapter : ListAdapter<Data, CardViewHolder>(CharacterComparator){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.card_item, parent, false)
-        return CardViewHolder(view, onClickListener)
+        return CardViewHolder(view, onItemClickListener!!)
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
@@ -43,15 +47,18 @@ class CardAdapter : ListAdapter<Data, CardViewHolder>(CharacterComparator){
     }
 }
 
-class CardViewHolder(val view: View, val onClickListener: ((Int) -> Unit)?) :
+class CardViewHolder(val view: View, val onItemClickListener: OnItemClickListener ) :
     RecyclerView.ViewHolder(view) {
+    init {
+        val findViewById = view.findViewById<CardView>(R.id.laout)
+        findViewById.setOnClickListener { onItemClickListener.onItemClick(bindingAdapterPosition) }
+    }
     private val name: TextView = view.findViewById(R.id.balance)
-    private val layout: CardView = view.findViewById(R.id.layout)
 
     fun bind(card: Data) {
         name.setText("$ " + card.amount)
-        layout.setOnClickListener {
-            onClickListener?.invoke(bindingAdapterPosition)
-        }
     }
+}
+interface OnItemClickListener {
+    fun onItemClick(position: Int)
 }

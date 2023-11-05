@@ -1,11 +1,9 @@
 package uz.gita.lesson40.data.repository
 
 import retrofit2.Response
-import uz.gita.lesson40.data.datasource.CardsDataSourse
+import uz.gita.lesson40.data.source.CardsDataSourse
 import uz.gita.lesson40.domain.entity.AddCardEntity
 import uz.gita.lesson40.domain.entity.CardResponse
-import uz.gita.lesson40.domain.entity.TransferEntity
-import uz.gita.lesson40.domain.entity.TransferResponse
 import uz.gita.lesson40.domain.entity.getResponse.GetCardsesponse
 import javax.inject.Inject
 
@@ -18,8 +16,8 @@ class CardsRepositoryImpl @Inject constructor(private val dataSourse: CardsDataS
         return dataSourse.getCards(bearerToken)
     }
 
-    override suspend fun transfer(bearerToken: String, transferEntity: TransferEntity): Response<TransferResponse> {
-        return dataSourse.transfer(bearerToken, transferEntity)
+    override suspend fun delete(id: String, bearerToken: String): Response<String> {
+        return dataSourse.delete(id,bearerToken)
     }
 
 
