@@ -29,11 +29,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
             addCard.setOnClickListener {
                 parentFragmentManager.beginTransaction().setReorderingAllowed(true)
-                    .addToBackStack("Home").replace(R.id.container, AddCardFragment()).commit()
+                    .addToBackStack("HomeFragment").replace(R.id.container, AddCardFragment()).commit()
             }
             pay.setOnClickListener {
                 parentFragmentManager.beginTransaction().setReorderingAllowed(true)
-                    .addToBackStack("Home").replace(R.id.container, TransferFragment()).commit()
+                    .addToBackStack("HomeFragment").replace(R.id.container, TransferFragment()).commit()
             }
         }
         viewLifecycleOwner.lifecycleScope.launch {
@@ -41,7 +41,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 dataList.clear()
                 dataList.addAll(data)
                 adapter.submitList(dataList)
-                adapter.notifyDataSetChanged()
             }
         }
         adapter.setOnClickClickListener { inex ->

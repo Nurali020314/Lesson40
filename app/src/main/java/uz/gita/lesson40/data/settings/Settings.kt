@@ -7,4 +7,5 @@ interface Settings {
     var screenPassword:String?
     var policy:Int
     var auth:Int
+    var phone_number: String?
 }

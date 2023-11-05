@@ -4,7 +4,8 @@ import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class SettingsImpl @Inject constructor(@ApplicationContext context: Context) : Settings {
+class SettingsImpl @Inject constructor(@ApplicationContext context: Context,
+) : Settings {
     private val preferences = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
 
     override var temporaryToken: String?
@@ -29,4 +30,7 @@ class SettingsImpl @Inject constructor(@ApplicationContext context: Context) : S
     override var auth: Int
         get() = preferences.getInt("auth",-1)
         set(value) =preferences.edit().putInt("auth",value).apply()
+    override var phone_number: String?
+        get() = preferences.getString("phone", null)
+        set(value) = preferences.edit().putString("phone", value).apply()
 }

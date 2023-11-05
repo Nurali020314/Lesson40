@@ -7,12 +7,12 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import uz.gita.lesson40.data.constants.State
-import uz.gita.lesson40.domain.DeleteUseCase
+//import uz.gita.lesson40.domain.DeleteUseCase
 import uz.gita.lesson40.domain.GetCardUseCase
 import uz.gita.lesson40.domain.entity.getResponse.Data
 import javax.inject.Inject
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val getCardUseCase: GetCardUseCase,private val deleteUseCase: DeleteUseCase):ViewModel() {
+class HomeViewModel @Inject constructor(private val getCardUseCase: GetCardUseCase):ViewModel() {
 
     private val _openSuccsesFlow = MutableSharedFlow<List<Data>>()
     val openSuccesFlow:SharedFlow<List<Data>> =_openSuccsesFlow
@@ -26,6 +26,13 @@ class HomeViewModel @Inject constructor(private val getCardUseCase: GetCardUseCa
     private val _openNetworkFlow = MutableSharedFlow<Unit>()
     val openNetworkFlow:SharedFlow<Unit> =_openNetworkFlow
 
+    init {
+        viewModelScope.launch {
+            val state=getCardUseCase.invoke()
+            handleState(state)
+        }
+    }
+
     fun getCards(){
         viewModelScope.launch {
             val state=getCardUseCase.invoke()
@@ -33,21 +40,21 @@ class HomeViewModel @Inject constructor(private val getCardUseCase: GetCardUseCa
         }
     }
 
-    fun deleteItem(id:String){
-        viewModelScope.launch {
-            val state=deleteUseCase.invoke(id)
-            handleDeleteState(state)
-        }
-    }
+//    fun deleteItem(id:String){
+//        viewModelScope.launch {
+//            val state=deleteUseCase.invoke(id)
+//            handleDeleteState(state)
+//        }
+//    }
 
-    private suspend fun handleDeleteState(state: State) {
-        when(state){
-            is State.Error -> _openErrorFlow.emit(state.code)
-            State.NoNetwork -> _openNetworkFlow.emit(Unit)
-            is State.Success<*> -> _openSuccsesDeleteFlow.emit(state.data.toString())
-        }
-
-    }
+//    private suspend fun handleDeleteState(state: State) {
+//        when(state){
+//            is State.Error -> _openErrorFlow.emit(state.code)
+//            State.NoNetwork -> _openNetworkFlow.emit(Unit)
+//            is State.Success<*> -> _openSuccsesDeleteFlow.emit(state.data.toString())
+//        }
+//
+//    }
 
     private suspend fun handleState(state: State) {
         when(state){

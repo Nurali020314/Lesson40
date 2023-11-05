@@ -13,13 +13,8 @@ import uz.gita.lesson40.R
 import uz.gita.lesson40.domain.entity.CardEntity
 import uz.gita.lesson40.domain.entity.getResponse.Data
 
-class CardAdapter : ListAdapter<Data, CardViewHolder>(CharacterComparator){
+class CardAdapter : ListAdapter<Data, CardViewHolder>(CharacterComparator) {
     private var onClickListener: ((Int) -> Unit)? = null
-        private var onItemClickListener: OnItemClickListener? = null
-        fun setOnItemClickListener(listener: OnItemClickListener) {
-            onItemClickListener = listener
-        }
-
     fun setOnClickClickListener(clickListener: (Int) -> Unit) {
         onClickListener = clickListener
     }
@@ -27,7 +22,7 @@ class CardAdapter : ListAdapter<Data, CardViewHolder>(CharacterComparator){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.card_item, parent, false)
-        return CardViewHolder(view, onItemClickListener!!)
+        return CardViewHolder(view, onClickListener!!)
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
@@ -47,18 +42,15 @@ class CardAdapter : ListAdapter<Data, CardViewHolder>(CharacterComparator){
     }
 }
 
-class CardViewHolder(val view: View, val onItemClickListener: OnItemClickListener ) :
+class CardViewHolder(val view: View, val onItemClickListener: (Int) -> Unit) :
     RecyclerView.ViewHolder(view) {
-    init {
-        val findViewById = view.findViewById<CardView>(R.id.laout)
-        findViewById.setOnClickListener { onItemClickListener.onItemClick(bindingAdapterPosition) }
-    }
+    val layout = view.findViewById<CardView>(R.id.layout)
     private val name: TextView = view.findViewById(R.id.balance)
 
     fun bind(card: Data) {
         name.setText("$ " + card.amount)
+        layout.setOnClickListener {
+            onItemClickListener.invoke(bindingAdapterPosition)
+        }
     }
-}
-interface OnItemClickListener {
-    fun onItemClick(position: Int)
 }

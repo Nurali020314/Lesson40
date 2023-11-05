@@ -4,12 +4,13 @@ import android.util.Log
 import uz.gita.lesson40.data.constants.ErrorCodes
 import uz.gita.lesson40.data.constants.State
 import uz.gita.lesson40.data.repository.AuthRepository
+import uz.gita.lesson40.data.settings.Settings
 import uz.gita.lesson40.domain.entity.SignInEntity
 import uz.gita.lesson40.domain.entity.SignInResponse
 import java.io.IOException
 import javax.inject.Inject
 
-class SignInUseCase @Inject constructor(val authRepository: AuthRepository) {
+class SignInUseCase @Inject constructor(val authRepository: AuthRepository, val settings: Settings) {
 
 
     suspend operator fun invoke(password: String?, phone: String?): State {
@@ -20,17 +21,12 @@ class SignInUseCase @Inject constructor(val authRepository: AuthRepository) {
             val entity = SignInEntity(password, phone)
             val response = authRepository.SignIn(entity)
 
-
             if (response.code() == 422) {
-
                 return State.Error(ErrorCodes.PASSWORD)
-
             }
             val body = response.body() as SignInResponse
             authRepository.signInToken = body.access_token
-            Log.d("tagg", "${body.access_token} ")
-
-
+            settings.phone_number = phone
         } catch (exception: Exception) {
             exception.printStackTrace()
             if (exception is IOException) return State.NoNetwork
