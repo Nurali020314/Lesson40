@@ -1,10 +1,7 @@
-package uz.gita.lesson40.data.source
+package uz.gita.lesson40.data.datasource
 
 import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.Header
-import uz.gita.lesson40.domain.entity.AddCardEntity
-import uz.gita.lesson40.domain.entity.CardResponse
 import uz.gita.lesson40.domain.entity.SignInEntity
 import uz.gita.lesson40.domain.entity.SignInResponse
 import uz.gita.lesson40.domain.entity.SignUpEntity

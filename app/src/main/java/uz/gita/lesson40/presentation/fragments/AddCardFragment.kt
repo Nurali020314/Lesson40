@@ -1,4 +1,4 @@
-package uz.gita.lesson40.presentation.ui
+package uz.gita.lesson40.presentation.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -11,25 +11,24 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import uz.gita.lesson40.R
 import uz.gita.lesson40.data.constants.ErrorCodes
 import uz.gita.lesson40.databinding.FragmentAddCardBinding
 import uz.gita.lesson40.domain.entity.AddCardEntity
-import uz.gita.lesson40.presentation.AddCardViewModel
+import uz.gita.lesson40.presentation.CardViewModel
 
 @AndroidEntryPoint
-class AddCard:Fragment(R.layout.fragment_add_card) {
+class AddCardFragment:Fragment(R.layout.fragment_add_card) {
     private val biding:FragmentAddCardBinding by viewBinding()
-    private val viewModel:AddCardViewModel by viewModels()
+    private val viewModel:CardViewModel by viewModels()
     private lateinit var addCardEntity: AddCardEntity
    
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         biding.apply {
             back.setOnClickListener {
-                parentFragmentManager.beginTransaction().replace(R.id.container,Home()).commit()
+                requireActivity().onBackPressedDispatcher.onBackPressed()
             }
             submit.setOnClickListener{
                 if (biding.eDate.text.length==5){
@@ -50,14 +49,14 @@ class AddCard:Fragment(R.layout.fragment_add_card) {
                 }
 
                 viewModel.addCard(addCardEntity)
-                parentFragmentManager.beginTransaction().replace(R.id.container,Successful()).commit()
+                parentFragmentManager.beginTransaction().replace(R.id.container,SuccessfulFragment()).commit()
             }
         }
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED){
-                viewModel.openSuccsesScreenFlow.collect{it->
+                viewModel.openSuccessScreenFlow.collect{it->
                     Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-                        parentFragmentManager.beginTransaction().replace(R.id.container,Home()).commit()
+                    parentFragmentManager.beginTransaction().replace(R.id.container,HomeFragment()).commit()
 
                 }
 
@@ -67,7 +66,7 @@ class AddCard:Fragment(R.layout.fragment_add_card) {
                     when(error){
                         ErrorCodes.CARD_NAME->biding.eName.error="Wrong name"
                         ErrorCodes.PEN_ERROR->biding.eNumber.error="Wrong Card Number"
-                        ErrorCodes.MONH->biding.eDate.error="Wrong Month"
+                        ErrorCodes.MONTH->biding.eDate.error="Wrong Month"
                         ErrorCodes.YEAR->biding.eDate.error="Wrong Year"
                     }
 

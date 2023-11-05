@@ -6,7 +6,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import uz.gita.lesson40.data.repository.CardsRepository
 import uz.gita.lesson40.data.repository.CardsRepositoryImpl
-import uz.gita.lesson40.data.source.CardsDataSourseImpl
 
 @Module
 @InstallIn(SingletonComponent::class)

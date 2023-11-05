@@ -7,13 +7,16 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import uz.gita.lesson40.data.constants.State
+import uz.gita.lesson40.data.settings.Settings
 import uz.gita.lesson40.domain.AddCardUseCase
+import uz.gita.lesson40.domain.TransferUseCase
 import uz.gita.lesson40.domain.entity.AddCardEntity
+import uz.gita.lesson40.domain.entity.TransferEntity
 import javax.inject.Inject
 @HiltViewModel
-class AddCardViewModel @Inject constructor(private val addCardUseCase: AddCardUseCase):ViewModel(){
-    private val _openSuccsesScreenFlow= MutableSharedFlow<String>()
-    val openSuccsesScreenFlow:SharedFlow<String> = _openSuccsesScreenFlow
+class CardViewModel @Inject constructor(private val settings: Settings, private val addCardUseCase: AddCardUseCase,private val transferUseCase: TransferUseCase):ViewModel(){
+    private val _openSuccessScreenFlow= MutableSharedFlow<String>()
+    val openSuccessScreenFlow:SharedFlow<String> = _openSuccessScreenFlow
 
     private val _openErrorFlow= MutableSharedFlow<Int>()
     val openErrorFlow:SharedFlow<Int> = _openErrorFlow
@@ -28,12 +31,18 @@ class AddCardViewModel @Inject constructor(private val addCardUseCase: AddCardUs
 
         }
     }
+    fun transfer(transferEntity: TransferEntity){
+        viewModelScope.launch {
+            val state = transferUseCase.invoke(transferEntity)
+            handleState(state)
+        }
+    }
 
     private suspend fun handleState(state: State) {
         when(state){
             is State.Error -> _openErrorFlow.emit(state.code)
             State.NoNetwork -> _openNetworkFlow.emit(Unit)
-            is State.Success<*> -> _openSuccsesScreenFlow.emit(state.data.toString())
+            is State.Success<*> -> _openSuccessScreenFlow.emit(state.data.toString())
         }
     }
 

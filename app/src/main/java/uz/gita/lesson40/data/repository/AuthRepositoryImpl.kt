@@ -1,7 +1,7 @@
 package uz.gita.lesson40.data.repository
 
 import retrofit2.Response
-import uz.gita.lesson40.data.source.AuthDataSource
+import uz.gita.lesson40.data.datasource.AuthDataSource
 import uz.gita.lesson40.domain.entity.SignInEntity
 import uz.gita.lesson40.domain.entity.SignInResponse
 import uz.gita.lesson40.domain.entity.SignUpEntity

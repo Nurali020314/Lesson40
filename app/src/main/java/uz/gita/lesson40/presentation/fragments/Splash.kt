@@ -1,4 +1,4 @@
-package uz.gita.lesson40.presentation
+package uz.gita.lesson40.presentation.fragments
 
 import android.os.Bundle
 import android.os.CountDownTimer

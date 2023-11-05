@@ -1,4 +1,4 @@
-package uz.gita.lesson40.presentation.ui
+package uz.gita.lesson40.presentation.fragments
 
 import android.os.Bundle
 import android.view.View
@@ -55,7 +55,7 @@ class PinCode : Fragment(R.layout.account_pincode) {
                             settings.screenPassword = input
                         else if (input == settings.screenPassword) {
                             Toast.makeText(requireContext(), "True", Toast.LENGTH_SHORT).show()
-                            parentFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container, Home()).commit()
+                            parentFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container, HomeFragment()).commit()
                         }
                         else Toast.makeText(requireContext(), "False", Toast.LENGTH_SHORT).show()
                     }

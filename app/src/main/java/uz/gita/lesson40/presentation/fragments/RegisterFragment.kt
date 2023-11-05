@@ -1,4 +1,4 @@
-package uz.gita.lesson40.presentation
+package uz.gita.lesson40.presentation.fragments
 
 import android.os.Bundle
 import android.view.View
@@ -11,7 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import uz.gita.lesson40.R
 import uz.gita.lesson40.data.constants.ErrorCodes
 import uz.gita.lesson40.databinding.FragmentRegisterBinding
-import uz.gita.lesson40.presentation.ui.VerivyAccaunt
+import uz.gita.lesson40.presentation.RegisterViewModel
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment(R.layout.fragment_register) {
@@ -34,7 +34,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private val openVerifyLiveDataObserver: Observer<Unit> = Observer {
         Toast.makeText(requireContext(), "Verifyni och", Toast.LENGTH_SHORT).show()
-        parentFragmentManager.beginTransaction().replace(R.id.container, VerivyAccaunt()).addToBackStack("tonext").commit()
+        parentFragmentManager.beginTransaction().replace(R.id.container, VerivyAccauntFragment()).addToBackStack("tonext").commit()
     }
 
     private val errorLiveDataObserver: Observer<Int> = Observer { error ->

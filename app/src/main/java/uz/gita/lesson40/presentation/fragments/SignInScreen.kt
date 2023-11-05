@@ -1,29 +1,18 @@
-package uz.gita.lesson40.presentation
+package uz.gita.lesson40.presentation.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import uz.gita.lesson40.R
 import uz.gita.lesson40.data.constants.ErrorCodes
 import uz.gita.lesson40.data.settings.SettingsImpl
-import uz.gita.lesson40.databinding.FragmentRegisterBinding
 import uz.gita.lesson40.databinding.SignInScreenBinding
-import uz.gita.lesson40.presentation.ui.AddCard
-import uz.gita.lesson40.presentation.ui.Home
-import uz.gita.lesson40.presentation.ui.PinCode
+import uz.gita.lesson40.presentation.SignInviewModel
 
 @AndroidEntryPoint
 class SignInScreen : Fragment(R.layout.sign_in_screen) {
