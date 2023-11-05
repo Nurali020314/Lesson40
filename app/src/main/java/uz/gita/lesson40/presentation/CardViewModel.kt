@@ -45,5 +45,4 @@ class CardViewModel @Inject constructor(private val settings: Settings, private 
             is State.Success<*> -> _openSuccessScreenFlow.emit(state.data.toString())
         }
     }
-
 }
