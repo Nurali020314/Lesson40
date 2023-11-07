@@ -71,4 +71,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getCards()
+    }
 }
