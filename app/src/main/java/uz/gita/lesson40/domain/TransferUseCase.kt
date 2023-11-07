@@ -19,6 +19,8 @@ class TransferUseCase@Inject constructor(private val repository: CardsRepository
         try {
             val response = repository.transfer("Bearer ${settings.sigInToken}", transferEntity)
             if (response.code() == 422) return State.Error(ErrorCodes.INCORRECT_CARD)
+            settings.code = response.body()?.code
+            settings.temporaryToken = response.body()?.token
         } catch (exception: Exception) {
             exception.printStackTrace()
             if (exception is IOException) return State.NoNetwork

@@ -6,7 +6,9 @@ import uz.gita.lesson40.domain.entity.AddCardEntity
 import uz.gita.lesson40.domain.entity.CardResponse
 import uz.gita.lesson40.domain.entity.TransferEntity
 import uz.gita.lesson40.domain.entity.TransferResponse
+import uz.gita.lesson40.domain.entity.TransferVerifyEntity
 import uz.gita.lesson40.domain.entity.getResponse.GetCardsesponse
+import uz.gita.lesson40.domain.entity.getResponse.TransferVerifyResponse
 import javax.inject.Inject
 
 class CardsRepositoryImpl @Inject constructor(private val dataSourse: CardsDataSourse):CardsRepository{
@@ -24,6 +26,13 @@ class CardsRepositoryImpl @Inject constructor(private val dataSourse: CardsDataS
 
     override suspend fun transfer(bearerToken: String, transferEntity: TransferEntity): Response<TransferResponse> {
         return dataSourse.transfer(bearerToken, transferEntity)
+    }
+
+    override suspend fun transferVerify(
+        bearerToken: String,
+        transferVerifyEntity: TransferVerifyEntity
+    ): Response<TransferVerifyResponse> {
+        return dataSourse.transferVerify(bearerToken, transferVerifyEntity)
     }
 
 

@@ -6,7 +6,9 @@ import uz.gita.lesson40.domain.entity.AddCardEntity
 import uz.gita.lesson40.domain.entity.CardResponse
 import uz.gita.lesson40.domain.entity.TransferEntity
 import uz.gita.lesson40.domain.entity.TransferResponse
+import uz.gita.lesson40.domain.entity.TransferVerifyEntity
 import uz.gita.lesson40.domain.entity.getResponse.GetCardsesponse
+import uz.gita.lesson40.domain.entity.getResponse.TransferVerifyResponse
 import javax.inject.Inject
 
 class CardsDataSourseImpl @Inject constructor(private val authApi:AuthApi): CardsDataSourse {
@@ -24,6 +26,14 @@ class CardsDataSourseImpl @Inject constructor(private val authApi:AuthApi): Card
     ): Response<TransferResponse> {
         return authApi.transfer(bearerToken, transferEntity)
     }
+
+    override suspend fun transferVerify(
+        bearerToken: String,
+        transferVerifyEntity: TransferVerifyEntity
+    ): Response<TransferVerifyResponse> {
+        return authApi.transferVerify(bearerToken, transferVerifyEntity)
+    }
+
 
 //    override suspend fun delete(id: String, bearerToken: String): Response<String> {
 //        return authApi.deleteCards(id,bearerToken)

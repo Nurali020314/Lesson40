@@ -11,29 +11,31 @@ import uz.gita.lesson40.data.settings.Settings
 import uz.gita.lesson40.domain.AddCardUseCase
 import uz.gita.lesson40.domain.TransferUseCase
 import uz.gita.lesson40.domain.TransferVerifyUseCase
-import uz.gita.lesson40.domain.entity.AddCardEntity
 import uz.gita.lesson40.domain.entity.TransferEntity
-import uz.gita.lesson40.domain.entity.TransferVerifyEntity
 import javax.inject.Inject
-@HiltViewModel
-class CardViewModel @Inject constructor(private val settings: Settings, private val addCardUseCase: AddCardUseCase,private val transferUseCase: TransferUseCase, private val transferVerifyUseCase: TransferVerifyUseCase):ViewModel(){
-    private val _openSuccessScreenFlow= MutableSharedFlow<String>()
-    val openSuccessScreenFlow:SharedFlow<String> = _openSuccessScreenFlow
 
-    private val _openVerifySuccessScreenFlow= MutableSharedFlow<String>()
-    val openVerifySuccessScreenFlow:SharedFlow<String> = _openVerifySuccessScreenFlow
+@HiltViewModel
+class TransferViewModel @Inject constructor(private val settings: Settings, private val transferUseCase: TransferUseCase, private val transferVerifyUseCase: TransferVerifyUseCase):
+    ViewModel(){
+    private val _openSuccessScreenFlow= MutableSharedFlow<String>()
+    val openSuccessScreenFlow: SharedFlow<String> = _openSuccessScreenFlow
 
     private val _openErrorFlow= MutableSharedFlow<Int>()
-    val openErrorFlow:SharedFlow<Int> = _openErrorFlow
+    val openErrorFlow: SharedFlow<Int> = _openErrorFlow
 
     private val _openNetworkFlow= MutableSharedFlow<Unit>()
-    val openNetworkFlow:SharedFlow<Unit> = _openNetworkFlow
+    val openNetworkFlow: SharedFlow<Unit> = _openNetworkFlow
 
-    fun addCard(addCardEntity: AddCardEntity){
+    fun transfer(transferEntity: TransferEntity){
         viewModelScope.launch {
-            val state = addCardUseCase.invoke(addCardEntity)
+            val state = transferUseCase.invoke(transferEntity)
             handleState(state)
-
+        }
+    }
+    fun transferVerify(){
+        viewModelScope.launch {
+            val state = transferVerifyUseCase.invoke()
+            handleState(state)
         }
     }
 

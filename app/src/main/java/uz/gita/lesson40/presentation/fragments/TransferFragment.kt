@@ -13,12 +13,12 @@ import uz.gita.lesson40.R
 import uz.gita.lesson40.data.constants.ErrorCodes
 import uz.gita.lesson40.databinding.FragmentTransferBinding
 import uz.gita.lesson40.domain.entity.TransferEntity
-import uz.gita.lesson40.presentation.CardViewModel
+import uz.gita.lesson40.presentation.TransferViewModel
 
 @AndroidEntryPoint
 class TransferFragment : Fragment(R.layout.fragment_transfer) {
     private val binding: FragmentTransferBinding by viewBinding()
-    private val viewModel: CardViewModel by viewModels()
+    private val viewModel: TransferViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.back.setOnClickListener {
@@ -35,6 +35,12 @@ class TransferFragment : Fragment(R.layout.fragment_transfer) {
         }
         lifecycleScope.launch {
             viewModel.openSuccessScreenFlow.collect {
+                viewModel.transferVerify()
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.openSuccessScreenFlow.collect {message ->
+                Toast.makeText(requireContext(),message , Toast.LENGTH_SHORT).show()
                 parentFragmentManager.beginTransaction().replace(R.id.container,SuccessfulFragment()).commit()
             }
         }

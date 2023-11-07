@@ -17,7 +17,9 @@ import uz.gita.lesson40.domain.entity.SignUpResentResponse
 import uz.gita.lesson40.domain.entity.SignUpResponse
 import uz.gita.lesson40.domain.entity.TransferEntity
 import uz.gita.lesson40.domain.entity.TransferResponse
+import uz.gita.lesson40.domain.entity.TransferVerifyEntity
 import uz.gita.lesson40.domain.entity.getResponse.GetCardsesponse
+import uz.gita.lesson40.domain.entity.getResponse.TransferVerifyResponse
 
 interface AuthApi {
     @POST("auth/sign-up")
@@ -41,4 +43,6 @@ interface AuthApi {
     @DELETE("cards/{id}")
     suspend fun deleteCards(@Path("id") id: String, @Header("Authorization") bearerToken: String): Response<String>
 
+    @POST("transfers/verify")
+    suspend fun transferVerify(@Header("Authorization") bearerToken :String, @Body transferVerifyEntity: TransferVerifyEntity) : Response<TransferVerifyResponse>
 }
