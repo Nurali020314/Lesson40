@@ -16,7 +16,7 @@ import uz.gita.lesson40.domain.entity.TransferEntity
 import uz.gita.lesson40.domain.entity.TransferVerifyEntity
 import javax.inject.Inject
 @HiltViewModel
-class CardViewModel @Inject constructor(private val settings: Settings, private val addCardUseCase: AddCardUseCase,private val transferUseCase: TransferUseCase, private val transferVerifyUseCase: TransferVerifyUseCase):ViewModel(){
+class CardViewModel @Inject constructor(private val settings: Settings,private val addCardUseCase: AddCardUseCase):ViewModel(){
     private val _openSuccessScreenFlow= MutableSharedFlow<String>()
     val openSuccessScreenFlow:SharedFlow<String> = _openSuccessScreenFlow
 

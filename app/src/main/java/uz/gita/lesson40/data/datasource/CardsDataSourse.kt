@@ -4,6 +4,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import uz.gita.lesson40.domain.entity.AddCardEntity
 import uz.gita.lesson40.domain.entity.CardResponse
+import uz.gita.lesson40.domain.entity.PaymentResponse
 import uz.gita.lesson40.domain.entity.TransferEntity
 import uz.gita.lesson40.domain.entity.TransferResponse
 import uz.gita.lesson40.domain.entity.TransferVerifyEntity
@@ -18,5 +19,6 @@ interface CardsDataSourse {
     suspend fun transfer(bearerToken:String, transferEntity: TransferEntity):Response<TransferResponse>
 
     suspend fun transferVerify(bearerToken:String, transferVerifyEntity: TransferVerifyEntity):Response<TransferVerifyResponse>
+    suspend fun payment(bearerToken:String):Response<PaymentResponse>
 
 }
