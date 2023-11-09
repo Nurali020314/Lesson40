@@ -4,6 +4,7 @@ import retrofit2.Response
 import uz.gita.lesson40.data.api.AuthApi
 import uz.gita.lesson40.domain.entity.AddCardEntity
 import uz.gita.lesson40.domain.entity.CardResponse
+import uz.gita.lesson40.domain.entity.PaymentResponse
 import uz.gita.lesson40.domain.entity.TransferEntity
 import uz.gita.lesson40.domain.entity.TransferResponse
 import uz.gita.lesson40.domain.entity.TransferVerifyEntity
@@ -32,6 +33,10 @@ class CardsDataSourseImpl @Inject constructor(private val authApi:AuthApi): Card
         transferVerifyEntity: TransferVerifyEntity
     ): Response<TransferVerifyResponse> {
         return authApi.transferVerify(bearerToken, transferVerifyEntity)
+    }
+
+    override suspend fun payment(bearerToken: String): Response<PaymentResponse> {
+        return authApi.payment(bearerToken)
     }
 
 

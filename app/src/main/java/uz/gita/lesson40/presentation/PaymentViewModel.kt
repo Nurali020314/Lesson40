@@ -2,6 +2,7 @@ package uz.gita.lesson40.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
@@ -14,20 +15,24 @@ import uz.gita.lesson40.domain.TransferVerifyUseCase
 import uz.gita.lesson40.domain.entity.Data
 import javax.inject.Inject
 
+@HiltViewModel
 class PaymentViewModel @Inject constructor(private val settings: Settings, private val paymentUseCase: PaymentUseCase):
     ViewModel(){
     private val _openSuccessScreenFlow= MutableSharedFlow<List<Data>>()
     val openSuccessScreenFlow: SharedFlow<List<Data>> = _openSuccessScreenFlow
 
-    private val _openVerifySuccessScreenFlow= MutableSharedFlow<String>()
-    val openVerifySuccessScreenFlow: SharedFlow<String> = _openVerifySuccessScreenFlow
 
     private val _openErrorFlow= MutableSharedFlow<Int>()
     val openErrorFlow: SharedFlow<Int> = _openErrorFlow
 
     private val _openNetworkFlow= MutableSharedFlow<Unit>()
     val openNetworkFlow: SharedFlow<Unit> = _openNetworkFlow
-
+    init {
+        viewModelScope.launch {
+            val state = paymentUseCase.invoke()
+            handleState(state)
+        }
+    }
     fun payment(){
         viewModelScope.launch {
             val state = paymentUseCase.invoke()

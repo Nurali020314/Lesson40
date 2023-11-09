@@ -31,9 +31,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 parentFragmentManager.beginTransaction().setReorderingAllowed(true)
                     .addToBackStack("HomeFragment").replace(R.id.container, AddCardFragment()).commit()
             }
-            pay.setOnClickListener {
+            send.setOnClickListener {
                 parentFragmentManager.beginTransaction().setReorderingAllowed(true)
                     .addToBackStack("HomeFragment").replace(R.id.container, TransferFragment()).commit()
+            }
+            pay.setOnClickListener {
+                parentFragmentManager.beginTransaction().setReorderingAllowed(true)
+                    .addToBackStack("HomeFragment").replace(R.id.container, PaymentFragment()).commit()
             }
         }
         viewLifecycleOwner.lifecycleScope.launch {
