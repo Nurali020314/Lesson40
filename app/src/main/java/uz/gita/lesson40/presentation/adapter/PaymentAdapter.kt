@@ -1,7 +1,6 @@
 package uz.gita.lesson40.presentation.adapter
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +11,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import uz.gita.lesson40.R
-import uz.gita.lesson40.domain.entity.Data
 import uz.gita.lesson40.domain.entity.Type
+
 
 class PaymentAdapter : ListAdapter<Type, PaymentViewHolder>(CharacterComparator) {
     private var onClickListener: ((Int) -> Unit)? = null
@@ -24,7 +23,7 @@ class PaymentAdapter : ListAdapter<Type, PaymentViewHolder>(CharacterComparator)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentViewHolder {
         val view = LayoutInflater
             .from(parent.context).inflate(R.layout.payment_item, parent, false)
-        return PaymentViewHolder(view, onClickListener!!)
+        return PaymentViewHolder(view, onClickListener)
     }
 
     override fun onBindViewHolder(holder: PaymentViewHolder, position: Int) {
@@ -44,18 +43,17 @@ class PaymentAdapter : ListAdapter<Type, PaymentViewHolder>(CharacterComparator)
     }
 }
 
-class PaymentViewHolder(val view: View, val onItemClickListener: (Int) -> Unit) :
+class PaymentViewHolder(val view: View, val onItemClickListener: ((Int) -> Unit)?) :
     RecyclerView.ViewHolder(view) {
     val layout: CardView = view.findViewById(R.id.card_view)
     private val image: ImageView = view.findViewById(R.id.image)
 
     fun bind(service: Type) {
         layout.setOnClickListener {
-            onItemClickListener.invoke(bindingAdapterPosition)
+            onItemClickListener?.invoke(bindingAdapterPosition)
         }
         Glide.with(image)
             .load(service.icon_url)
             .into(image)
-
     }
 }

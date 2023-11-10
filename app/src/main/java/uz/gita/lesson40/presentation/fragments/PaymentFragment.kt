@@ -38,7 +38,7 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.openSuccessScreenFlow.collect { data ->
                 list.clear()
-                list.addAll(data.first().types)
+                list.addAll(data)
                 adapter.submitList(list)
             }
         }

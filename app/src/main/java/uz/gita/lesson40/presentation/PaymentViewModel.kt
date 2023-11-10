@@ -13,13 +13,14 @@ import uz.gita.lesson40.domain.PaymentUseCase
 import uz.gita.lesson40.domain.TransferUseCase
 import uz.gita.lesson40.domain.TransferVerifyUseCase
 import uz.gita.lesson40.domain.entity.Data
+import uz.gita.lesson40.domain.entity.Type
 import javax.inject.Inject
 
 @HiltViewModel
 class PaymentViewModel @Inject constructor(private val settings: Settings, private val paymentUseCase: PaymentUseCase):
     ViewModel(){
-    private val _openSuccessScreenFlow= MutableSharedFlow<List<Data>>()
-    val openSuccessScreenFlow: SharedFlow<List<Data>> = _openSuccessScreenFlow
+    private val _openSuccessScreenFlow= MutableSharedFlow<List<Type>>()
+    val openSuccessScreenFlow: SharedFlow<List<Type>> = _openSuccessScreenFlow
 
 
     private val _openErrorFlow= MutableSharedFlow<Int>()
@@ -44,7 +45,7 @@ class PaymentViewModel @Inject constructor(private val settings: Settings, priva
         when(state){
             is State.Error -> _openErrorFlow.emit(state.code)
             State.NoNetwork -> _openNetworkFlow.emit(Unit)
-            is State.Success<*> -> _openSuccessScreenFlow.emit(state.data as List<Data>)
+            is State.Success<*> -> _openSuccessScreenFlow.emit(state.data as List<Type>)
         }
     }
 }

@@ -11,7 +11,7 @@ class PaymentUseCase  @Inject constructor(private val repository: CardsRepositor
 
         try {
             val payment = repository.payment("Bearer ${settings.sigInToken}")
-            val data = payment.body()?.data
+            val data = payment.body()?.data?.get(0)?.types
             return State.Success(data)
 
 
