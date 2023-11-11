@@ -3,6 +3,7 @@ package uz.gita.lesson40.presentation.fragments
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -25,9 +26,17 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
     private val list = ArrayList<Type>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.payment()
         binding.recycler.adapter = adapter
         binding.back.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+        adapter.setOnClickClickListener { index ->
+            parentFragmentManager.beginTransaction()
+                .setReorderingAllowed(true)
+                .addToBackStack("PaymentFragment")
+                .replace(R.id.container, PayFragment::class.java, bundleOf("id" to adapter.currentList[index].id))
+                .commit()
         }
 
         viewLifecycleOwner.lifecycleScope.launch {

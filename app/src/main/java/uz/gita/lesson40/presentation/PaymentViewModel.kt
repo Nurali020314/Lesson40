@@ -9,15 +9,17 @@ import kotlinx.coroutines.launch
 import uz.gita.lesson40.data.constants.State
 import uz.gita.lesson40.data.settings.Settings
 import uz.gita.lesson40.domain.AddCardUseCase
+import uz.gita.lesson40.domain.PayUseCase
 import uz.gita.lesson40.domain.PaymentUseCase
 import uz.gita.lesson40.domain.TransferUseCase
 import uz.gita.lesson40.domain.TransferVerifyUseCase
 import uz.gita.lesson40.domain.entity.Data
+import uz.gita.lesson40.domain.entity.PayEntity
 import uz.gita.lesson40.domain.entity.Type
 import javax.inject.Inject
 
 @HiltViewModel
-class PaymentViewModel @Inject constructor(private val settings: Settings, private val paymentUseCase: PaymentUseCase):
+class PaymentViewModel @Inject constructor(private val settings: Settings,private val payUseCase: PayUseCase,private val paymentUseCase: PaymentUseCase):
     ViewModel(){
     private val _openSuccessScreenFlow= MutableSharedFlow<List<Type>>()
     val openSuccessScreenFlow: SharedFlow<List<Type>> = _openSuccessScreenFlow
@@ -28,15 +30,15 @@ class PaymentViewModel @Inject constructor(private val settings: Settings, priva
 
     private val _openNetworkFlow= MutableSharedFlow<Unit>()
     val openNetworkFlow: SharedFlow<Unit> = _openNetworkFlow
-    init {
+    fun payment(){
         viewModelScope.launch {
             val state = paymentUseCase.invoke()
             handleState(state)
         }
     }
-    fun payment(){
+    fun pay(payEntity: PayEntity){
         viewModelScope.launch {
-            val state = paymentUseCase.invoke()
+            val state = payUseCase.invoke(payEntity)
             handleState(state)
         }
     }
