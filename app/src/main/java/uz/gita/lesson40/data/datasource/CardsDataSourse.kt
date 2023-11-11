@@ -21,6 +21,7 @@ interface CardsDataSourse {
     suspend fun transfer(bearerToken:String, transferEntity: TransferEntity):Response<TransferResponse>
 
     suspend fun transferVerify(bearerToken:String, transferVerifyEntity: TransferVerifyEntity):Response<TransferVerifyResponse>
+    suspend fun payVerify(bearerToken:String, transferVerifyEntity: TransferVerifyEntity):Response<TransferVerifyResponse>
     suspend fun payment(bearerToken:String):Response<PaymentResponse>
 
     suspend fun pay(bearerToken:String, payEntity: PayEntity):Response<PayResponse>

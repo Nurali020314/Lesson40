@@ -43,5 +43,12 @@ class CardsRepositoryImpl @Inject constructor(private val dataSourse: CardsDataS
         return dataSourse.transferVerify(bearerToken, transferVerifyEntity)
     }
 
+    override suspend fun payVerify(
+        bearerToken: String,
+        transferVerifyEntity: TransferVerifyEntity
+    ): Response<TransferVerifyResponse> {
+        return dataSourse.payVerify(bearerToken, transferVerifyEntity)
+    }
+
 
 }

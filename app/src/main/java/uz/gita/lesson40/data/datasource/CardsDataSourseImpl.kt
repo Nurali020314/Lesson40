@@ -37,6 +37,13 @@ class CardsDataSourseImpl @Inject constructor(private val authApi:AuthApi): Card
         return authApi.transferVerify(bearerToken, transferVerifyEntity)
     }
 
+    override suspend fun payVerify(
+        bearerToken: String,
+        transferVerifyEntity: TransferVerifyEntity
+    ): Response<TransferVerifyResponse> {
+        return authApi.payVerify(bearerToken, transferVerifyEntity)
+    }
+
     override suspend fun payment(bearerToken: String): Response<PaymentResponse> {
         return authApi.payment(bearerToken)
     }

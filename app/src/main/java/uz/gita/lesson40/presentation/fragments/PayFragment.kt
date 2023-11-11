@@ -45,6 +45,7 @@ class PayFragment : Fragment(R.layout.pay_fragment) {
         }
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.openSuccessScreenFlow.collect {
+                viewModel.payVerify()
                 parentFragmentManager.beginTransaction().replace(R.id.container,SuccessfulFragment()).commit()
             }
         }

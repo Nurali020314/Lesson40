@@ -54,4 +54,6 @@ interface AuthApi {
 
     @POST("transfers/verify")
     suspend fun transferVerify(@Header("Authorization") bearerToken :String, @Body transferVerifyEntity: TransferVerifyEntity) : Response<TransferVerifyResponse>
+    @POST("payments/pay/verify")
+    suspend fun payVerify(@Header("Authorization") bearerToken :String, @Body transferVerifyEntity: TransferVerifyEntity) : Response<TransferVerifyResponse>
 }

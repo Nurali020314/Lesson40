@@ -25,5 +25,6 @@ interface CardsRepository {
     suspend fun pay(bearerToken:String, payEntity: PayEntity):Response<PayResponse>
 
     suspend fun transferVerify(bearerToken:String, transferVerifyEntity: TransferVerifyEntity):Response<TransferVerifyResponse>
+    suspend fun payVerify(bearerToken:String, transferVerifyEntity: TransferVerifyEntity):Response<TransferVerifyResponse>
 
 }
