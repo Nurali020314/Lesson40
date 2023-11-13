@@ -25,7 +25,7 @@ class PayFragment : Fragment(R.layout.pay_fragment) {
             val amountEdt = binding.amount.text
             val amount = if (amountEdt.isNullOrEmpty()) 0 else Integer.parseInt(amountEdt.toString())
             val phoneEdt = binding.phone.text
-            val phone = if (phoneEdt.isNullOrEmpty()) "" else phoneEdt.toString()
+            val phone = if (phoneEdt.isNullOrEmpty()) "" else "+998$phoneEdt"
             val entity = PayEntity(amount, 57, id!!, phone)
             viewModel.pay(entity)
         }

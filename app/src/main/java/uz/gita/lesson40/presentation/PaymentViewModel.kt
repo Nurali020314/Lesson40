@@ -19,8 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class PaymentViewModel @Inject constructor(private val settings: Settings,private val payVerifyUseCase: PayVerifyUseCase,private val payUseCase: PayUseCase,private val paymentUseCase: PaymentUseCase):
     ViewModel(){
-    private val _openSuccessScreenFlow= MutableSharedFlow<List<Type>>()
-    val openSuccessScreenFlow: SharedFlow<List<Type>> = _openSuccessScreenFlow
+    private val _openSuccessScreenFlow= MutableSharedFlow<List<Type>?>()
+    val openSuccessScreenFlow: SharedFlow<List<Type>?> = _openSuccessScreenFlow
 
 
     private val _openErrorFlow= MutableSharedFlow<Int>()
@@ -37,7 +37,11 @@ class PaymentViewModel @Inject constructor(private val settings: Settings,privat
     fun pay(payEntity: PayEntity){
         viewModelScope.launch {
             val state = payUseCase.invoke(payEntity)
-            handleState(state)
+            when(state) {
+                is State.Error -> _openErrorFlow.emit(state.code)
+                State.NoNetwork -> _openNetworkFlow.emit(Unit)
+                is State.Success<*> -> _openSuccessScreenFlow.emit(null)
+            }
         }
     }
     fun payVerify(){

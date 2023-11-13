@@ -4,11 +4,9 @@ plugins {
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
 }
-
 android {
     namespace 'uz.gita.lesson40'
     compileSdk 34
-
     defaultConfig {
         applicationId "uz.gita.lesson40"
         minSdk 21
@@ -18,7 +16,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
     buildFeatures {
         viewBinding true
     }
@@ -44,6 +41,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.10.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.android.volley:volley:1.2.1'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     testImplementation "org.mockito:mockito-core:5.6.0"
@@ -73,6 +71,8 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
 
     implementation 'com.github.bumptech.glide:glide:4.16.0'
+    androidTestImplementation("com.kaspersky.android-components:kaspresso:1.5.1")
+
 }
 
 kapt {
