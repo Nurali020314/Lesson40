@@ -17,11 +17,11 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class PincodeFragment : Fragment(R.layout.account_pincode) {
-    @Inject
-    lateinit var settings : Settings
     private val binding: AccountPincodeBinding by viewBinding()
     private var input: String = ""
     private var isCreating = false
+    @Inject
+    lateinit var settings : Settings
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         reset()

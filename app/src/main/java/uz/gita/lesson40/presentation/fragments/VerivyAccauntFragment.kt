@@ -15,7 +15,7 @@ import uz.gita.lesson40.presentation.SignUpResendViewModel
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class VerivyAccauntFragment : Fragment(R.layout.verification_screen) {
+class VerifyAccountFragment : Fragment(R.layout.verification_screen) {
     private val viewModel: SignUpResendViewModel by viewModels()
     private val binding: VerificationScreenBinding by viewBinding()
     @Inject
@@ -72,7 +72,7 @@ class VerivyAccauntFragment : Fragment(R.layout.verification_screen) {
 
         binding.proced.setOnClickListener {
             if(secound<45){
-                parentFragmentManager.beginTransaction().replace(R.id.container,PincodeFragment()).commit()
+                parentFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container,PincodeFragment()).commit()
                 settings.auth=1
 
             }
