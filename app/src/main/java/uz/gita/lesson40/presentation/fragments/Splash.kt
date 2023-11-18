@@ -18,7 +18,11 @@ class Splash : Fragment(R.layout.fragment_splash1) {
             override fun onFinish() {
                 if (settingsImpl.policy==-1){
                     parentFragmentManager.beginTransaction().replace(R.id.container, Splash1()).commit()
-                }else{
+                }
+                else if(!settingsImpl.sigInToken.isNullOrEmpty()){
+                    parentFragmentManager.beginTransaction().replace(R.id.container, PincodeFragment()).commit()
+                }
+                else{
                     parentFragmentManager.beginTransaction().replace(R.id.container, SignInScreen()).commit()
                 }
 
