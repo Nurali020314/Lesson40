@@ -55,7 +55,7 @@ class PincodeFragment : Fragment(R.layout.account_pincode) {
                             settings.screenPassword = input
                         else if (input == settings.screenPassword) {
                             Toast.makeText(requireContext(), "True", Toast.LENGTH_SHORT).show()
-                            parentFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container, HomeFragment()).commit()
+                            parentFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container, AccountFragment()).commit()
                         }
                         else Toast.makeText(requireContext(), "False", Toast.LENGTH_SHORT).show()
                     }
