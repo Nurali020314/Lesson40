@@ -12,7 +12,8 @@ class AccountFragment : Fragment(R.layout.account_fragment) {
     private val binding : AccountFragmentBinding by viewBinding()
     @SuppressLint("CommitTransaction")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.bottomNavigation.setOnItemSelectedListener { it ->
+        parentFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.my_container, HomeFragment()).commit()
+        binding.bottomNavigation.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.navigation_item_1 -> {parentFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.my_container, HomeFragment()).commit()}
                 R.id.navigation_item_2 -> {parentFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.my_container, HistoryFragment()).commit()}
