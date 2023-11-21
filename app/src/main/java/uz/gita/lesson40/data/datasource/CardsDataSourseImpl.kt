@@ -4,12 +4,14 @@ import retrofit2.Response
 import uz.gita.lesson40.data.api.AuthApi
 import uz.gita.lesson40.domain.entity.AddCardEntity
 import uz.gita.lesson40.domain.entity.CardResponse
+import uz.gita.lesson40.domain.entity.HistoryResponse
 import uz.gita.lesson40.domain.entity.PayEntity
 import uz.gita.lesson40.domain.entity.PaymentResponse
 import uz.gita.lesson40.domain.entity.TransferEntity
 import uz.gita.lesson40.domain.entity.TransferResponse
 import uz.gita.lesson40.domain.entity.TransferVerifyEntity
 import uz.gita.lesson40.domain.entity.getResponse.GetCardsesponse
+import uz.gita.lesson40.domain.entity.getResponse.HistoryByCard
 import uz.gita.lesson40.domain.entity.getResponse.PayResponse
 import uz.gita.lesson40.domain.entity.getResponse.TransferVerifyResponse
 import javax.inject.Inject
@@ -50,6 +52,14 @@ class CardsDataSourseImpl @Inject constructor(private val authApi:AuthApi): Card
 
     override suspend fun pay(bearerToken: String, payEntity: PayEntity): Response<PayResponse> {
         return authApi.pay(bearerToken, payEntity)
+    }
+
+    override suspend fun history(bearerToken: String): Response<HistoryResponse> {
+        return authApi.history(bearerToken)
+    }
+
+    override suspend fun historyByCard(bearerToken: String, id: Int): Response<HistoryByCard> {
+        return authApi.historyByCard(bearerToken, id)
     }
 
 

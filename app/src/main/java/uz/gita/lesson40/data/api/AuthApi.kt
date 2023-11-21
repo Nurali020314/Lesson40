@@ -9,6 +9,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 import uz.gita.lesson40.domain.entity.AddCardEntity
 import uz.gita.lesson40.domain.entity.CardResponse
+import uz.gita.lesson40.domain.entity.HistoryResponse
 import uz.gita.lesson40.domain.entity.PayEntity
 import uz.gita.lesson40.domain.entity.PaymentResponse
 import uz.gita.lesson40.domain.entity.SignInEntity
@@ -21,6 +22,7 @@ import uz.gita.lesson40.domain.entity.TransferEntity
 import uz.gita.lesson40.domain.entity.TransferResponse
 import uz.gita.lesson40.domain.entity.TransferVerifyEntity
 import uz.gita.lesson40.domain.entity.getResponse.GetCardsesponse
+import uz.gita.lesson40.domain.entity.getResponse.HistoryByCard
 import uz.gita.lesson40.domain.entity.getResponse.PayResponse
 import uz.gita.lesson40.domain.entity.getResponse.TransferVerifyResponse
 
@@ -49,6 +51,12 @@ interface AuthApi {
     @GET("payments/categories?include=types")
     suspend fun payment(@Header("Authorization") bearerToken :String) : Response<PaymentResponse>
 
+    @GET("history")
+    suspend fun history(@Header("Authorization") bearerToken :String) : Response<HistoryResponse>
+
+    @GET("history?page=:id")
+    suspend fun historyByCard(@Header("Authorization") bearerToken :String, id: Int) : Response<HistoryByCard>
+
     @POST("payments/pay")
     suspend fun pay(@Header("Authorization") bearerToken :String, @Body payEntity: PayEntity) : Response<PayResponse>
 
@@ -56,4 +64,6 @@ interface AuthApi {
     suspend fun transferVerify(@Header("Authorization") bearerToken :String, @Body transferVerifyEntity: TransferVerifyEntity) : Response<TransferVerifyResponse>
     @POST("payments/pay/verify")
     suspend fun payVerify(@Header("Authorization") bearerToken :String, @Body transferVerifyEntity: TransferVerifyEntity) : Response<TransferVerifyResponse>
+
+
 }
