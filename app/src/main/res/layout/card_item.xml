@@ -3,35 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
-    android:layout_marginHorizontal="10dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/layout"
+        android:layout_width="350dp"
+        android:layout_height="180dp"
+        android:backgroundTint="#3862F7"
         android:clickable="true"
         android:focusable="true"
-        android:layout_width="350dp"
         app:cardCornerRadius="15dp"
-        android:layout_height="150dp"
-        android:backgroundTint="#3862F7"
+        app:contentPadding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <LinearLayout
-
             android:layout_width="match_parent"
-            android:layout_margin="24dp"
-
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <LinearLayout
-                android:layout_margin="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
-                    android:layout_marginHorizontal="4dp"
                     android:id="@+id/imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -39,46 +37,49 @@
 
                 <TextView
 
-                    android:layout_marginHorizontal="12dp"
                     android:id="@+id/card_nomer"
-                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="**** 2236" />
+                    android:layout_marginLeft="12dp"
+                    android:text="**** 2236"
+                    android:textColor="@color/white" />
+
                 <TextView
                     android:id="@+id/data"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="02/24"
-                    android:textColor="@color/white"
                     android:gravity="end"
-                    />
+                    android:text="02/24"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
+
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="match_parent">
+                android:gravity="bottom"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
                 <TextView
-                    android:text="Balance"
-                    android:textSize="18sp"
-                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Balance"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
 
                     />
+
                 <TextView
                     android:id="@+id/balance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$ 5 300.00"
                     android:textColor="@color/white"
-                    android:textSize="32sp"
-                    />
+                    android:textSize="32sp" />
 
 
             </LinearLayout>
-
 
 
         </LinearLayout>
