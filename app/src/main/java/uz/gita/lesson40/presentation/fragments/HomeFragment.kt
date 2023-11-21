@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import uz.gita.lesson40.R
@@ -18,13 +19,14 @@ import uz.gita.lesson40.presentation.adapter.CardAdapter
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
-    private val biding: FragmentHomeBinding by viewBinding()
+    private val binding: FragmentHomeBinding by viewBinding()
     private val viewModel: HomeViewModel by viewModels()
     private val dataList: ArrayList<Data> by lazy { ArrayList() }
     private val adapter by lazy { CardAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        biding.apply {
+
+        binding.apply {
             recycler.adapter = adapter
 
             addCard.setOnClickListener {
@@ -47,12 +49,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 adapter.submitList(dataList)
             }
         }
-        adapter.setOnClickClickListener { inex ->
+        adapter.setOnClickClickListener { index ->
             val dialog = AlertDialog.Builder(requireContext())
                 .setTitle("Deleting Card")
                 .setMessage("Are you sure?")
-                .setPositiveButton("Yes") { dialog, _ ->
-                    dataList.removeAt(inex)
+                .setPositiveButton("Yes") { _, _ ->
+                    dataList.removeAt(index)
                     adapter.submitList(dataList)
                 }.show()
         }
