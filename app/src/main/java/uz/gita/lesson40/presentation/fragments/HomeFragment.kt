@@ -7,6 +7,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.SnapHelper
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +27,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val adapter by lazy { CardAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val snapHelper: SnapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(binding.recycler)
 
         binding.apply {
             recycler.adapter = adapter
