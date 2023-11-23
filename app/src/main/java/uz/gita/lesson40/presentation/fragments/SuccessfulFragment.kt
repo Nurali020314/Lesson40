@@ -12,7 +12,7 @@ class SuccessfulFragment:Fragment(R.layout.fragment_succesful) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         biding.button.setOnClickListener{
-            parentFragmentManager.beginTransaction().replace(R.id.container,HomeFragment()).commit()
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
     }
 
