@@ -68,7 +68,7 @@
         android:layout_marginTop="16dp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="180dp"
         android:layout_marginTop="10dp"
         android:id="@+id/recycler"
         android:orientation="horizontal"
@@ -90,50 +90,33 @@
         android:layout_marginTop="10dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="12dp">
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        <FrameLayout
+            android:padding="16dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="+998 ** *** ** **"
-            app:boxCornerRadiusBottomEnd="10dp"
-            app:boxCornerRadiusBottomStart="10dp"
-            app:boxCornerRadiusTopEnd="10dp"
-            app:boxCornerRadiusTopStart="10dp"
-            app:hintTextColor="@color/black"
-            app:prefixText="+998"
-            app:prefixTextColor="@color/black">
-
-            <com.google.android.material.textfield.TextInputEditText
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="31dp"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:background="@drawable/card_background">
+            </LinearLayout>
+            <EditText
+                android:layout_width="230dp"
+                android:background="@android:color/transparent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:maxLength="16"
                 android:id="@+id/phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColorHint="@color/black"
                 android:fontFamily="@font/poppins"
-                android:inputType="phone"
-                android:maxLength="9"
-                android:paddingStart="30dp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
+                android:hint="Enter the Phone Number"/>
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end|center_vertical"/>
+        </FrameLayout>
     </androidx.cardview.widget.CardView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Identified user"
-        android:layout_marginLeft="30dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/poppins"
-        android:textSize="16sp"
-        android:layout_marginTop="30dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Your Name"
-        android:fontFamily="@font/poppins"
-        android:layout_marginLeft="21dp"
-        android:id="@+id/card_owner"
-        android:textColor="#50000000"
-        android:textSize="32sp"
-        android:layout_marginTop="16dp"/>
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -143,7 +126,6 @@
         android:layout_width="333dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
         android:backgroundTint="#3862F8"
         android:background="@drawable/button_background"
         android:fontFamily="@font/poppins"
