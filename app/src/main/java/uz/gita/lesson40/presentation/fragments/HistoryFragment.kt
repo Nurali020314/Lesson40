@@ -2,6 +2,7 @@ package uz.gita.lesson40.presentation.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -18,18 +19,23 @@ import uz.gita.lesson40.presentation.adapter.HistoryAdapter
 @AndroidEntryPoint
 class HistoryFragment : Fragment(R.layout.history_fragment) {
     private val binding: HistoryFragmentBinding by viewBinding()
-    private val viewModel : HistoryViewModel by viewModels()
+    private val viewModel: HistoryViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.history()
         val adapter = HistoryAdapter()
-        binding.recycler.adapter =adapter
+        binding.recycler.adapter = adapter
+        adapter.setOnClickClickListener { index ->
+            parentFragmentManager.beginTransaction().setReorderingAllowed(true)
+                .addToBackStack("HistoryFragment")
+                .replace(R.id.container, BillFragment::class.java, bundleOf()).commit()
+        }
         lifecycleScope.launch {
             viewModel.openErrorFlow.collect {
 
             }
         }
         lifecycleScope.launch {
-            viewModel.openSuccessScreenFlow.collect {data ->
+            viewModel.openSuccessScreenFlow.collect { data ->
                 adapter.submitList(data.reversed())
             }
         }
