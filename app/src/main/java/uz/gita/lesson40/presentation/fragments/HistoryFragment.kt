@@ -27,7 +27,15 @@ class HistoryFragment : Fragment(R.layout.history_fragment) {
         adapter.setOnClickClickListener { index ->
             parentFragmentManager.beginTransaction().setReorderingAllowed(true)
                 .addToBackStack("HistoryFragment")
-                .replace(R.id.container, BillFragment::class.java, bundleOf()).commit()
+                .replace(R.id.container, BillFragment::class.java, bundleOf(
+                    "amount" to adapter.currentList[index].amount,
+                    "card" to adapter.currentList[index].card.pan,
+                    "id" to adapter.currentList[index].id,
+                    "is_out" to adapter.currentList[index].is_output,
+                    "phone" to adapter.currentList[index].card.phone_number,
+                    "name" to adapter.currentList[index].card.owner,
+
+                )).commit()
         }
         lifecycleScope.launch {
             viewModel.openErrorFlow.collect {
