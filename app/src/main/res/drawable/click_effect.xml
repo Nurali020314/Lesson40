@@ -3,6 +3,4 @@
     android:color="#46092380"
     android:effectColor="@color/white"
     >
-
-
 </ripple>
