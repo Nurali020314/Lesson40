@@ -1,7 +1,10 @@
 package uz.gita.lesson40.presentation.fragments
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -36,6 +39,31 @@ class HistoryFragment : Fragment(R.layout.history_fragment) {
                     "name" to adapter.currentList[index].card.owner,
 
                 )).commit()
+        }
+        binding.all.setOnClickListener {
+            binding.allT.setTextColor(Color.WHITE)
+            binding.serviceT.setTextColor(Color.BLACK)
+            binding.panT.setTextColor(Color.BLACK)
+            binding.all.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#3629B7"))
+            binding.service.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#F2F1F9"))
+            binding.pan.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#F2F1F9"))
+
+        }
+        binding.pan.setOnClickListener {
+            binding.panT.setTextColor(Color.WHITE)
+            binding.serviceT.setTextColor(Color.BLACK)
+            binding.allT.setTextColor(Color.BLACK)
+            binding.pan.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#3629B7"))
+            binding.all.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#F2F1F9"))
+            binding.service.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#F2F1F9"))
+        }
+        binding.service.setOnClickListener {
+            binding.serviceT.setTextColor(Color.WHITE)
+            binding.allT.setTextColor(Color.BLACK)
+            binding.panT.setTextColor(Color.BLACK)
+            binding.service.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#3629B7"))
+            binding.all.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#F2F1F9"))
+            binding.pan.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#F2F1F9"))
         }
         lifecycleScope.launch {
             viewModel.openErrorFlow.collect {
