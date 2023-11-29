@@ -21,6 +21,8 @@ class PayFragment : Fragment(R.layout.pay_fragment) {
     private val viewModel: PaymentViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val id = arguments?.getInt("id")
+        if (!arguments?.getString("number").isNullOrEmpty())
+            binding.phone.setText(arguments?.getString("number"))
         binding.send.setOnClickListener {
             val amountEdt = binding.amount.text
             val amount = if (amountEdt.isNullOrEmpty()) 0 else Integer.parseInt(amountEdt.toString())

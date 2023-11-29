@@ -24,6 +24,8 @@ class TransferFragment : Fragment(R.layout.fragment_transfer) {
         binding.back.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
+        if (!arguments?.getString("number").isNullOrEmpty())
+            binding.number.setText(arguments?.getString("number"))
         binding.send.setOnClickListener {
             val a = binding.amount.text.toString()
             var amount = 0
