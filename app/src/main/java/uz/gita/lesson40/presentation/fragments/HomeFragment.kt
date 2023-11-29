@@ -1,11 +1,15 @@
 package uz.gita.lesson40.presentation.fragments
 
 import android.app.AlertDialog
+import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Vibrator
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -47,6 +51,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 FastPayModel(false, "998001252", 2),
             )
         )
+        binding.notification.setOnClickListener {
+            if (binding.notification.tag == "on"){
+                if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.VIBRATE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                    vibratePhone()
+                } else {
+                    ActivityCompat.requestPermissions(requireActivity(),
+                        arrayOf(android.Manifest.permission.VIBRATE),
+                        123)
+                }
+                binding.notification.tag = "off"
+                binding.notification.setImageResource(R.drawable.mute)
+            }
+            else {
+                binding.notification.tag = "on"
+                binding.notification.setImageResource(R.drawable.notifications)
+            }
+        }
         adapterFast.setOnClickClickListener { index ->
             if (!adapterFast.currentList[index].isCard)
                 parentFragmentManager.beginTransaction().setReorderingAllowed(true)
@@ -127,5 +149,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onResume() {
         super.onResume()
         viewModel.getCards()
+    }
+    private fun vibratePhone() {
+        val vibrator = requireContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+
+        if (vibrator.hasVibrator()) {
+            vibrator.vibrate(500L)
+        }
     }
 }

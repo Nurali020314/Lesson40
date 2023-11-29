@@ -31,10 +31,12 @@
                 android:layout_weight="1" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:layout_gravity="center|end"
+                android:tag="on"
                 android:layout_marginEnd="8dp"
+                android:id="@+id/notification"
                 android:src="@drawable/notifications"
 
                 />
