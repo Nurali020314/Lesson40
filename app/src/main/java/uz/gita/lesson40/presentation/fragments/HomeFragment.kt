@@ -51,6 +51,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 FastPayModel(false, "998001252", 2),
             )
         )
+        binding.swipe.setOnRefreshListener {
+            viewModel.getCards()
+        }
         binding.notification.setOnClickListener {
             if (binding.notification.tag == "on"){
                 if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.VIBRATE)
@@ -112,6 +115,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.openSuccesFlow.collect { data ->
+                binding.swipe.isRefreshing = false
                 dataList.clear()
                 dataList.addAll(data)
                 adapter.submitList(dataList)
@@ -129,6 +133,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.openErrorFlow.collect { error ->
+                binding.swipe.isRefreshing = false
                 if (error == 1) {
                     Toast.makeText(
                         requireContext(),
@@ -140,6 +145,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.openNetworkFlow.collect {
+                binding.swipe.isRefreshing = false
                 Toast.makeText(requireContext(), "No Network", Toast.LENGTH_SHORT)
                     .show()
             }
