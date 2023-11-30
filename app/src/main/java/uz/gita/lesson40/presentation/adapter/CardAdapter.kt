@@ -23,7 +23,7 @@ class CardAdapter : ListAdapter<Data, CardViewHolder>(CharacterComparator) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.card_item, parent, false)
-        return CardViewHolder(view, onClickListener!!)
+        return CardViewHolder(view, onClickListener)
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
@@ -43,7 +43,7 @@ class CardAdapter : ListAdapter<Data, CardViewHolder>(CharacterComparator) {
     }
 }
 
-class CardViewHolder(val view: View, val onItemClickListener: (Int) -> Unit) :
+class CardViewHolder(val view: View, val onItemClickListener: ((Int) -> Unit)?) :
     RecyclerView.ViewHolder(view) {
     val layout = view.findViewById<CardView>(R.id.layout)
     private val name: TextView = view.findViewById(R.id.balance)
@@ -52,7 +52,7 @@ class CardViewHolder(val view: View, val onItemClickListener: (Int) -> Unit) :
     fun bind(card: Data) {
         name.setText("$ " + card.amount)
         layout.setOnClickListener {
-            onItemClickListener.invoke(bindingAdapterPosition)
+            onItemClickListener?.invoke(bindingAdapterPosition)
         }
     }
 }
