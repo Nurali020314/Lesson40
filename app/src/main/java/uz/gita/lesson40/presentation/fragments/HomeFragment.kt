@@ -24,6 +24,7 @@ import uz.gita.lesson40.R
 import uz.gita.lesson40.databinding.FragmentHomeBinding
 import uz.gita.lesson40.domain.entity.FastPayModel
 import uz.gita.lesson40.domain.entity.getResponse.Data
+import uz.gita.lesson40.presentation.DataBaseViewModel
 import uz.gita.lesson40.presentation.HomeViewModel
 import uz.gita.lesson40.presentation.adapter.CardAdapter
 import uz.gita.lesson40.presentation.adapter.FastAdapter
@@ -32,6 +33,7 @@ import uz.gita.lesson40.presentation.adapter.FastAdapter
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding: FragmentHomeBinding by viewBinding()
     private val viewModel: HomeViewModel by viewModels()
+    private val databaseViewModel : DataBaseViewModel by viewModels()
     private val dataList: ArrayList<Data> by lazy { ArrayList() }
     private val adapter by lazy { CardAdapter() }
     private val adapterFast by lazy { FastAdapter() }

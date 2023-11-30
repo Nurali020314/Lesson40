@@ -16,6 +16,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import uz.gita.lesson40.R
 import uz.gita.lesson40.databinding.HistoryFragmentBinding
+import uz.gita.lesson40.domain.entity.Card
+import uz.gita.lesson40.domain.entity.CardHistoryEntity
+import uz.gita.lesson40.domain.entity.DataX
+import uz.gita.lesson40.presentation.DataBaseViewModel
 import uz.gita.lesson40.presentation.HistoryViewModel
 import uz.gita.lesson40.presentation.adapter.HistoryAdapter
 
@@ -23,22 +27,31 @@ import uz.gita.lesson40.presentation.adapter.HistoryAdapter
 class HistoryFragment : Fragment(R.layout.history_fragment) {
     private val binding: HistoryFragmentBinding by viewBinding()
     private val viewModel: HistoryViewModel by viewModels()
+    private val dataBaseViewModel: DataBaseViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.history()
         val adapter = HistoryAdapter()
+        dataBaseViewModel.getAll()
+        dataBaseViewModel.livedata.observe(viewLifecycleOwner) { list ->
+            if (!list.isNullOrEmpty()) {
+                adapter.submitList(converter(list))
+            }
+        }
+        viewModel.history()
         binding.recycler.adapter = adapter
         adapter.setOnClickClickListener { index ->
             parentFragmentManager.beginTransaction().setReorderingAllowed(true)
                 .addToBackStack("HistoryFragment")
-                .replace(R.id.container, BillFragment::class.java, bundleOf(
-                    "amount" to adapter.currentList[index].amount,
-                    "card" to adapter.currentList[index].card.pan,
-                    "id" to adapter.currentList[index].id,
-                    "is_out" to adapter.currentList[index].is_output,
-                    "phone" to adapter.currentList[index].card.phone_number,
-                    "name" to adapter.currentList[index].card.owner,
+                .replace(
+                    R.id.container, BillFragment::class.java, bundleOf(
+                        "amount" to adapter.currentList[index].amount,
+                        "card" to adapter.currentList[index].card.pan,
+                        "id" to adapter.currentList[index].id,
+                        "is_out" to adapter.currentList[index].is_output,
+                        "phone" to adapter.currentList[index].card.phone_number,
+                        "name" to adapter.currentList[index].card.owner,
 
-                )).commit()
+                        )
+                ).commit()
         }
         binding.all.setOnClickListener {
             binding.allT.setTextColor(Color.WHITE)
@@ -72,7 +85,8 @@ class HistoryFragment : Fragment(R.layout.history_fragment) {
         }
         lifecycleScope.launch {
             viewModel.openSuccessScreenFlow.collect { data ->
-                adapter.submitList(data.reversed())
+                dataBaseViewModel.insertAll(converterToEntity(data))
+                adapter.submitList(data)
             }
         }
         lifecycleScope.launch {
@@ -80,5 +94,33 @@ class HistoryFragment : Fragment(R.layout.history_fragment) {
 
             }
         }
+    }
+
+    private fun converter(list: List<CardHistoryEntity>) : ArrayList<DataX>{
+        val a = ArrayList<DataX>()
+        for (i in list) {
+            a.add(DataX(
+                    i.amount,
+                    Card(owner = i.name!!, pan = i.cardNumber!!, phone_number = i.phoneNumber!!),
+                    i.id,
+                    i.isSuccess
+                ))
+        }
+        return a
+    }
+    private fun converterToEntity(list: List<DataX>) : ArrayList<CardHistoryEntity>{
+        val a = ArrayList<CardHistoryEntity>()
+        for (i in list) {
+            a.add(CardHistoryEntity(
+                0,
+                i.card.owner,
+                i.card.phone_number,
+                i.card.pan,
+                i.is_output,
+                i.id,
+                i.amount
+            ))
+        }
+        return a
     }
 }
