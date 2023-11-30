@@ -14,6 +14,7 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
 
+
         binding.updatePassword.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(R.id.container, UpdatePasswordScreen())
                 .addToBackStack("UpdatePassword").commit()
