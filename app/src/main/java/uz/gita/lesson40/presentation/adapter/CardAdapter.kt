@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import uz.gita.lesson40.R
-import uz.gita.lesson40.domain.entity.CardEntity
 import uz.gita.lesson40.domain.entity.getResponse.Data
+import java.text.NumberFormat
+import java.util.Locale
+
 
 class CardAdapter : ListAdapter<Data, CardViewHolder>(CharacterComparator) {
     private var onClickListener: ((Int) -> Unit)? = null
@@ -47,12 +49,29 @@ class CardViewHolder(val view: View, val onItemClickListener: ((Int) -> Unit)?) 
     RecyclerView.ViewHolder(view) {
     val layout = view.findViewById<CardView>(R.id.layout)
     private val name: TextView = view.findViewById(R.id.balance)
-    val back:ImageView=view.findViewById(R.id.back_card_item)
+    val back: ImageView = view.findViewById(R.id.back_card_item)
 
     fun bind(card: Data) {
-        name.setText("$ " + card.amount)
+        val amount = roundToTwoDecimalPlaces(card.amount.toDouble())
+        val summ = formatNumber(amount.toInt())
+        name.setText("$summ  UZS")
         layout.setOnClickListener {
             onItemClickListener?.invoke(bindingAdapterPosition)
         }
+    }
+
+    fun roundToTwoDecimalPlaces(number: Double): Double {
+        val integerPart = number.toInt() // Get the integer part
+        val decimalPart =
+            ((number * 100) % 100).toInt() // Get the two digits after the decimal point
+        val roundedNumber =
+            integerPart + decimalPart / 100.00 // Combine the integer and decimal parts
+
+        return roundedNumber
+    }
+
+    fun formatNumber(number: Int): String? {
+        val numberFormat: NumberFormat = NumberFormat.getNumberInstance(Locale.US)
+        return numberFormat.format(number)
     }
 }
