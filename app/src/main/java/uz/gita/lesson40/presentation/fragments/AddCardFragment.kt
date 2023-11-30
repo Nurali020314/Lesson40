@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.SnapHelper
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -30,7 +32,8 @@ class AddCardFragment : Fragment(R.layout.fragment_add_card) {
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         biding.apply {
-
+            val snapHelper: SnapHelper = LinearSnapHelper()
+            snapHelper.attachToRecyclerView(recyclerView)
             recyclerView.adapter = adapter
             back.setOnClickListener {
                 requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -75,7 +78,7 @@ class AddCardFragment : Fragment(R.layout.fragment_add_card) {
                     "Noman Manzoor",
                     "9860228412344567",
                     "+998941234567",
-                    R.drawable.theme_1
+                    R.drawable.group_2
                 ),
                 Data(
                     0,
@@ -86,7 +89,7 @@ class AddCardFragment : Fragment(R.layout.fragment_add_card) {
                     "Noman Manzoor",
                     "9860228412344567",
                     "+998941234567",
-                    R.drawable.theme_1
+                    R.drawable.group_4
                 ),
                 Data(
                     0,
@@ -97,7 +100,7 @@ class AddCardFragment : Fragment(R.layout.fragment_add_card) {
                     "Noman Manzoor",
                     "9860228412344567",
                     "+998941234567",
-                    R.drawable.theme_1
+                    R.drawable.group_5
                 ),
                 Data(
                     0,
@@ -108,18 +111,7 @@ class AddCardFragment : Fragment(R.layout.fragment_add_card) {
                     "Noman Manzoor",
                     "9860228412344567",
                     "+998941234567",
-                    R.drawable.theme_1
-                ),
-                Data(
-                    0,
-                    "100000",
-                    2,
-                    30,
-                    0,
-                    "Noman Manzoor",
-                    "9860228412344567",
-                    "+998941234567",
-                    R.drawable.theme_1
+                    R.drawable.card_back
                 ),
             )
         )

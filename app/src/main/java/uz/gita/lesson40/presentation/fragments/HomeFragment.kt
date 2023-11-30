@@ -130,13 +130,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
         adapter.setOnClickClickListener { index ->
-            val dialog = AlertDialog.Builder(requireContext())
-                .setTitle("Deleting Card")
-                .setMessage("Are you sure?")
-                .setPositiveButton("Yes") { _, _ ->
-                    dataList.removeAt(index)
-                    adapter.submitList(dataList)
-                }.show()
+            parentFragmentManager.beginTransaction().setReorderingAllowed(true).addToBackStack("HomeFragment")
+                .replace(R.id.container, RenameFragment::class.java, bundleOf("src" to R.drawable.card_back)).commit()
         }
 
         viewLifecycleOwner.lifecycleScope.launch {

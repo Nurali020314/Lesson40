@@ -21,6 +21,7 @@ import uz.gita.lesson40.domain.entity.SignUpResponse
 import uz.gita.lesson40.domain.entity.TransferEntity
 import uz.gita.lesson40.domain.entity.TransferResponse
 import uz.gita.lesson40.domain.entity.TransferVerifyEntity
+import uz.gita.lesson40.domain.entity.UpdateCardEntity
 import uz.gita.lesson40.domain.entity.getResponse.GetCardsesponse
 import uz.gita.lesson40.domain.entity.getResponse.HistoryByCard
 import uz.gita.lesson40.domain.entity.getResponse.PayResponse
@@ -53,7 +54,6 @@ interface AuthApi {
 
     @GET("history")
     suspend fun history(@Header("Authorization") bearerToken :String) : Response<HistoryResponse>
-
     @GET("history?page=:id")
     suspend fun historyByCard(@Header("Authorization") bearerToken :String, id: Int) : Response<HistoryByCard>
 
@@ -65,5 +65,7 @@ interface AuthApi {
     @POST("payments/pay/verify")
     suspend fun payVerify(@Header("Authorization") bearerToken :String, @Body transferVerifyEntity: TransferVerifyEntity) : Response<TransferVerifyResponse>
 
+    @POST("cards/:cardId")
+    suspend fun updateCard(@Header("Authorization") bearerToken :String, cardId: Int, entity: UpdateCardEntity)
 
 }

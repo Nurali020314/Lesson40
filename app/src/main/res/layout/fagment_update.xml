@@ -2,128 +2,53 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_marginTop="16dp"
         android:id="@+id/lay1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/back"
+            android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:src="@drawable/back_24" />
 
         <TextView
-            android:gravity="end"
-            android:id="@+id/textView2"
+            android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:layout_marginEnd="16dp"
             android:textSize="24sp"
-            android:textColor="#F80505"
-            android:text="O`chirish" />
-    </LinearLayout>
+            android:layout_gravity="end"
+            android:fontFamily="@font/poppins"
+            android:textColor="#F44336"
+            android:text="Delete" />
+    </FrameLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/lay2"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
         android:layout_marginTop="60dp"
-        android:layout_width="350dp"
-        app:cardCornerRadius="15dp"
-        android:layout_height="170dp"
-        android:backgroundTint="#3862F7"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/card_item"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lay1" >
-
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_margin="24dp"
-
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_margin="4dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_marginHorizontal="4dp"
-                    android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/img_card" />
-
-                <TextView
-
-                    android:layout_marginHorizontal="6dp"
-                    android:id="@+id/card_name"
-                    android:textColor="@color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mastercard" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Expired date"
-                    android:textColor="@color/white"
-                    android:gravity="end"
-                    />
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="02/24"
-                    android:textColor="@color/white"
-                    android:gravity="end"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="match_parent">
-                <TextView
-                    android:text="Card number"
-                    android:textSize="18sp"
-                    android:textColor="@color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    />
-                <TextView
-                    android:id="@+id/card_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="8600 3129 8898 2248"
-                    android:textColor="@color/white"
-                    android:textSize="28sp"
-                    />
-
-
-            </LinearLayout>
-
-
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintTop_toBottomOf="@id/lay1" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_marginTop="36dp"
-        app:layout_constraintTop_toBottomOf="@id/lay2"
+        app:layout_constraintTop_toBottomOf="@id/recycler"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
@@ -143,7 +68,7 @@
 
     <Button
 
-        android:id="@+id/button2"
+        android:id="@+id/save"
         android:background="@drawable/back1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

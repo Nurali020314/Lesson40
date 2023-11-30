@@ -14,5 +14,5 @@ data class Data(
     val name: String,
     val pan: String,
     val phone_number: String,
-    val theme: Int
+    val theme: Int?
 )

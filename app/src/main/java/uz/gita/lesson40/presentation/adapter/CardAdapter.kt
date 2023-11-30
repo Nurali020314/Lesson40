@@ -54,7 +54,9 @@ class CardViewHolder(val view: View, val onItemClickListener: ((Int) -> Unit)?) 
     fun bind(card: Data) {
         val amount = roundToTwoDecimalPlaces(card.amount.toDouble())
         val summ = formatNumber(amount.toInt())
-        back.setBackgroundResource(card.theme)
+        if (card.theme == null)
+            back.setImageResource(R.drawable.card_back)
+        else back.setImageResource(card.theme)
         name.setText("$summ  UZS")
         layout.setOnClickListener {
             onItemClickListener?.invoke(bindingAdapterPosition)
