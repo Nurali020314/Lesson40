@@ -37,13 +37,13 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
     }
     private fun openTelegramChat() {
         val telegramChatUrl =
-            "https://t.me/Rasuljonov_Nurali" // Değiştirmeniz gereken yer: ChatUsername
+            "https://t.me/Rasuljonov_Nurali"
 
         val telegramIntent = Intent(Intent.ACTION_VIEW, Uri.parse(telegramChatUrl))
         if (telegramIntent.resolveActivity(requireContext().packageManager) != null) {
             startActivity(telegramIntent)
         } else {
-            // Telegram uygulaması yüklü değilse veya bir hata oluşursa buraya kod ekleyebilirsiniz
+
         }
     }
 
