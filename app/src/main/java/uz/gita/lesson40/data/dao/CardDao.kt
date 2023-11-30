@@ -8,11 +8,14 @@ import uz.gita.lesson40.domain.entity.CardHistoryEntity
 @Dao
 interface CardDao {
     @Insert
-    fun insert(entities: List<CardHistoryEntity>)
+    suspend fun insert(entities: List<CardHistoryEntity>)
 
     @Query("SELECT * FROM `transaction`")
-    fun getAll(): List<CardHistoryEntity>
+    suspend fun getAll(): List<CardHistoryEntity>
+
+    @Query("DELETE FROM `transaction`")
+    suspend fun delete()
 
     @Query("SELECT * FROM `transaction` WHERE isSuccess = :isSuccess")
-    fun get(isSuccess: Boolean): List<CardHistoryEntity>
+    suspend fun get(isSuccess: Boolean): List<CardHistoryEntity>
 }
