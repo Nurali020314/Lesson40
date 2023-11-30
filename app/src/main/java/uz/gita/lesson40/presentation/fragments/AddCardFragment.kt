@@ -16,75 +16,145 @@ import uz.gita.lesson40.R
 import uz.gita.lesson40.data.constants.ErrorCodes
 import uz.gita.lesson40.databinding.FragmentAddCardBinding
 import uz.gita.lesson40.domain.entity.AddCardEntity
+import uz.gita.lesson40.domain.entity.getResponse.Data
 import uz.gita.lesson40.presentation.CardViewModel
 import uz.gita.lesson40.presentation.adapter.CardAdapter
 
 @AndroidEntryPoint
-class AddCardFragment:Fragment(R.layout.fragment_add_card) {
-    private val biding:FragmentAddCardBinding by viewBinding()
-    private val viewModel:CardViewModel by viewModels()
+class AddCardFragment : Fragment(R.layout.fragment_add_card) {
+    private val biding: FragmentAddCardBinding by viewBinding()
+    private val viewModel: CardViewModel by viewModels()
     private lateinit var addCardEntity: AddCardEntity
-   
+    private val adapter by lazy { CardAdapter() }
+
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         biding.apply {
 
-
+            recyclerView.adapter = adapter
             back.setOnClickListener {
                 requireActivity().onBackPressedDispatcher.onBackPressed()
             }
-            submit.setOnClickListener{
-                if (biding.eDate.text.length==5){
-                    addCardEntity=AddCardEntity(
-                        biding.eDate.text.substring(0,1).toInt()
-                        ,biding.eDate.text.substring(1,biding.eDate.text.length).toInt()
-                        ,biding.eName.text.toString(),
-                        biding.eNumber.text.toString())
-                }else if (biding.eDate.text.length==6){
-                    addCardEntity=AddCardEntity(
-                        biding.eDate.text.substring(0,2).toInt()
-                        ,biding.eDate.text.substring(2,biding.eDate.text.length).toInt()
-                        ,biding.eName.text.toString(),
-                        biding.eNumber.text.toString())
-                }else{
-                    Toast.makeText(requireContext(), "Nimadir Nato`g`ri kiritildi", Toast.LENGTH_SHORT).show()
+            submit.setOnClickListener {
+                if (biding.eDate.text.length == 5) {
+                    addCardEntity = AddCardEntity(
+                        biding.eDate.text.substring(0, 1).toInt(),
+                        biding.eDate.text.substring(1, biding.eDate.text.length).toInt(),
+                        biding.eName.text.toString(),
+                        biding.eNumber.text.toString()
+                    )
+                } else if (biding.eDate.text.length == 6) {
+                    addCardEntity = AddCardEntity(
+                        biding.eDate.text.substring(0, 2).toInt(),
+                        biding.eDate.text.substring(2, biding.eDate.text.length).toInt(),
+                        biding.eName.text.toString(),
+                        biding.eNumber.text.toString()
+                    )
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Nimadir Nato`g`ri kiritildi",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     return@setOnClickListener
                 }
 
                 viewModel.addCard(addCardEntity)
-                parentFragmentManager.beginTransaction().replace(R.id.container,SuccessfulFragment()).commit()
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.container, SuccessfulFragment()).commit()
             }
         }
+        adapter.submitList(
+            listOf(
+                Data(
+                    0,
+                    "100000",
+                    2,
+                    30,
+                    0,
+                    "Noman Manzoor",
+                    "9860228412344567",
+                    "+998941234567",
+                    R.drawable.theme_1
+                ),
+                Data(
+                    0,
+                    "100000",
+                    2,
+                    30,
+                    0,
+                    "Noman Manzoor",
+                    "9860228412344567",
+                    "+998941234567",
+                    R.drawable.theme_1
+                ),
+                Data(
+                    0,
+                    "100000",
+                    2,
+                    30,
+                    0,
+                    "Noman Manzoor",
+                    "9860228412344567",
+                    "+998941234567",
+                    R.drawable.theme_1
+                ),
+                Data(
+                    0,
+                    "100000",
+                    2,
+                    30,
+                    0,
+                    "Noman Manzoor",
+                    "9860228412344567",
+                    "+998941234567",
+                    R.drawable.theme_1
+                ),
+                Data(
+                    0,
+                    "100000",
+                    2,
+                    30,
+                    0,
+                    "Noman Manzoor",
+                    "9860228412344567",
+                    "+998941234567",
+                    R.drawable.theme_1
+                ),
+            )
+        )
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.RESUMED){
-                viewModel.openSuccessScreenFlow.collect{it->
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.openSuccessScreenFlow.collect { it ->
                     Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-                    parentFragmentManager.beginTransaction().replace(R.id.container,HomeFragment()).commit()
+                    parentFragmentManager.beginTransaction().replace(R.id.container, HomeFragment())
+                        .commit()
 
                 }
 
             }
-            repeatOnLifecycle(Lifecycle.State.RESUMED){
-                viewModel.openErrorFlow.collect{error->
-                    when(error){
-                        ErrorCodes.CARD_NAME->biding.eName.error="Wrong name"
-                        ErrorCodes.PEN_ERROR->biding.eNumber.error="Wrong Card Number"
-                        ErrorCodes.MONTH->biding.eDate.error="Wrong Month"
-                        ErrorCodes.YEAR->biding.eDate.error="Wrong Year"
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.openErrorFlow.collect { error ->
+                    when (error) {
+                        ErrorCodes.CARD_NAME -> biding.eName.error = "Wrong name"
+                        ErrorCodes.PEN_ERROR -> biding.eNumber.error = "Wrong Card Number"
+                        ErrorCodes.MONTH -> biding.eDate.error = "Wrong Month"
+                        ErrorCodes.YEAR -> biding.eDate.error = "Wrong Year"
                     }
 
                 }
 
             }
-            repeatOnLifecycle(Lifecycle.State.RESUMED){
-                viewModel.openNetworkFlow.collect{
-                    Toast.makeText(requireContext(), "Internetizni yangilang", Toast.LENGTH_SHORT).show()
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.openNetworkFlow.collect {
+                    Toast.makeText(requireContext(), "Internetizni yangilang", Toast.LENGTH_SHORT)
+                        .show()
 
                 }
 
             }
         }
-       
+
 
     }
 }

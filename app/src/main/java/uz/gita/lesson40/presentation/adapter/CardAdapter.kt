@@ -49,11 +49,12 @@ class CardViewHolder(val view: View, val onItemClickListener: ((Int) -> Unit)?) 
     RecyclerView.ViewHolder(view) {
     val layout = view.findViewById<CardView>(R.id.layout)
     private val name: TextView = view.findViewById(R.id.balance)
-    val back: ImageView = view.findViewById(R.id.back_card_item)
+    private val back: ImageView = view.findViewById(R.id.back_card_item)
 
     fun bind(card: Data) {
         val amount = roundToTwoDecimalPlaces(card.amount.toDouble())
         val summ = formatNumber(amount.toInt())
+        back.setBackgroundResource(card.theme)
         name.setText("$summ  UZS")
         layout.setOnClickListener {
             onItemClickListener?.invoke(bindingAdapterPosition)
