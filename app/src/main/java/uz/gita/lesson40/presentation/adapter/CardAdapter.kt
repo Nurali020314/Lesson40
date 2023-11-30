@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.DiffUtil
@@ -46,6 +47,7 @@ class CardViewHolder(val view: View, val onItemClickListener: (Int) -> Unit) :
     RecyclerView.ViewHolder(view) {
     val layout = view.findViewById<CardView>(R.id.layout)
     private val name: TextView = view.findViewById(R.id.balance)
+    val back:ImageView=view.findViewById(R.id.back_card_item)
 
     fun bind(card: Data) {
         name.setText("$ " + card.amount)

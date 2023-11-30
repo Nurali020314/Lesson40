@@ -14,15 +14,23 @@ import uz.gita.lesson40.data.constants.ErrorCodes
 import uz.gita.lesson40.databinding.PayFragmentBinding
 import uz.gita.lesson40.domain.entity.PayEntity
 import uz.gita.lesson40.presentation.PaymentViewModel
+import uz.gita.lesson40.presentation.adapter.CardAdapter
 
 @AndroidEntryPoint
 class PayFragment : Fragment(R.layout.pay_fragment) {
     private val binding: PayFragmentBinding by viewBinding()
     private val viewModel: PaymentViewModel by viewModels()
+    private val adapter by lazy { CardAdapter() }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val id = arguments?.getInt("id")
         if (!arguments?.getString("number").isNullOrEmpty())
             binding.phone.setText(arguments?.getString("number"))
+
+
+        binding.recycler.adapter=adapter
+
+
         binding.send.setOnClickListener {
             val amountEdt = binding.amount.text
             val amount = if (amountEdt.isNullOrEmpty()) 0 else Integer.parseInt(amountEdt.toString())

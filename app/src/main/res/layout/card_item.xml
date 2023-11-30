@@ -9,18 +9,27 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/layout"
         android:layout_width="350dp"
-        android:layout_height="180dp"
+        android:layout_height="200dp"
         android:backgroundTint="#3862F7"
         android:clickable="true"
         android:focusable="true"
         app:cardCornerRadius="15dp"
-        app:contentPadding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
+        <ImageView
+            android:id="@+id/back_card_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/card_back"
+            android:scaleType="center"
+            />
+
+
         <LinearLayout
+          android:layout_margin="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
