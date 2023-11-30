@@ -52,8 +52,18 @@ class PaymentViewHolder(val view: View, val onItemClickListener: ((Int) -> Unit)
         layout.setOnClickListener {
             onItemClickListener?.invoke(bindingAdapterPosition)
         }
-        Glide.with(image)
-            .load(service.icon_url)
-            .into(image)
+
+
+        if (service.id<0){
+            image.setImageResource(service.category_id)
+        }else if (service.id==3){
+            image.setImageResource(R.drawable.img_17)
+        }
+        else{
+            Glide.with(image)
+                .load(service.icon_url)
+                .into(image)
+        }
     }
+
 }

@@ -32,6 +32,10 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
         adapter.setOnClickClickListener { index ->
+            if (index>2){
+                Toast.makeText(requireContext(), "yuq hali", Toast.LENGTH_SHORT).show()
+               return@setOnClickClickListener
+            }
             parentFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
                 .addToBackStack("PaymentFragment")
@@ -48,7 +52,16 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
             viewModel.openSuccessScreenFlow.collect { data ->
                 list.clear()
                 list.addAll(data!!)
+                list.add(Type(R.drawable.img_18,"","",-4,"",""))
+                list.add(Type(R.drawable.img_12,"","",-5,"",""))
+                list.add(Type(R.drawable.img_20,"","",-6,"",""))
+                list.add(Type(R.drawable.img_14,"","",-6,"",""))
+                list.add(Type(R.drawable.img_15,"","",-6,"",""))
+                list.add(Type(R.drawable.img_16,"","",-6,"",""))
+                list.add(Type(R.drawable.img_19,"","",-6,"",""))
+
                 adapter.submitList(list)
+
             }
         }
         viewLifecycleOwner.lifecycleScope.launch {

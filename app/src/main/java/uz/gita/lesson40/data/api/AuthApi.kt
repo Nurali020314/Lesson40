@@ -68,4 +68,7 @@ interface AuthApi {
     @POST("cards/:cardId")
     suspend fun updateCard(@Header("Authorization") bearerToken :String, cardId: Int, entity: UpdateCardEntity)
 
+    @POST("profile/update-password")
+    suspend fun updatePassword(@Header("Authorization") bearerToken :String) : Response<HistoryResponse>
+
 }
