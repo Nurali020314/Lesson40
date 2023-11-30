@@ -40,22 +40,6 @@ class HomeViewModel @Inject constructor(private val getCardUseCase: GetCardUseCa
         }
     }
 
-//    fun deleteItem(id:String){
-//        viewModelScope.launch {
-//            val state=deleteUseCase.invoke(id)
-//            handleDeleteState(state)
-//        }
-//    }
-
-//    private suspend fun handleDeleteState(state: State) {
-//        when(state){
-//            is State.Error -> _openErrorFlow.emit(state.code)
-//            State.NoNetwork -> _openNetworkFlow.emit(Unit)
-//            is State.Success<*> -> _openSuccsesDeleteFlow.emit(state.data.toString())
-//        }
-//
-//    }
-
     private suspend fun handleState(state: State) {
         when(state){
             is State.Error -> _openErrorFlow.emit(state.code)

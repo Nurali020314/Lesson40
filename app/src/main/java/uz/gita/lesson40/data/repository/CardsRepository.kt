@@ -10,6 +10,7 @@ import uz.gita.lesson40.domain.entity.PaymentResponse
 import uz.gita.lesson40.domain.entity.TransferEntity
 import uz.gita.lesson40.domain.entity.TransferResponse
 import uz.gita.lesson40.domain.entity.TransferVerifyEntity
+import uz.gita.lesson40.domain.entity.UpdateCardEntity
 import uz.gita.lesson40.domain.entity.getResponse.GetCardsesponse
 import uz.gita.lesson40.domain.entity.getResponse.HistoryByCard
 import uz.gita.lesson40.domain.entity.getResponse.PayResponse
@@ -32,4 +33,5 @@ interface CardsRepository {
     suspend fun history(bearerToken: String): Response<HistoryResponse>
 
     suspend fun historyByCard(bearerToken: String, id: Int) : Response<HistoryByCard>
+    suspend fun updateNameAndTheme(bearerToken: String, id: Int, entity: UpdateCardEntity): Response<Any>
 }

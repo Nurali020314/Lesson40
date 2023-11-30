@@ -11,12 +11,14 @@ import uz.gita.lesson40.data.settings.Settings
 import uz.gita.lesson40.domain.AddCardUseCase
 import uz.gita.lesson40.domain.TransferUseCase
 import uz.gita.lesson40.domain.TransferVerifyUseCase
+import uz.gita.lesson40.domain.UpdateCardUseCase
 import uz.gita.lesson40.domain.entity.AddCardEntity
 import uz.gita.lesson40.domain.entity.TransferEntity
 import uz.gita.lesson40.domain.entity.TransferVerifyEntity
+import uz.gita.lesson40.domain.entity.UpdateCardEntity
 import javax.inject.Inject
 @HiltViewModel
-class CardViewModel @Inject constructor(private val settings: Settings,private val addCardUseCase: AddCardUseCase):ViewModel(){
+class CardViewModel @Inject constructor(private val settings: Settings,private val updateCardUseCase: UpdateCardUseCase,private val addCardUseCase: AddCardUseCase):ViewModel(){
     private val _openSuccessScreenFlow= MutableSharedFlow<String>()
     val openSuccessScreenFlow:SharedFlow<String> = _openSuccessScreenFlow
 
@@ -34,6 +36,11 @@ class CardViewModel @Inject constructor(private val settings: Settings,private v
             val state = addCardUseCase.invoke(addCardEntity)
             handleState(state)
 
+        }
+    }
+    fun updateCard(id: Int, entity: UpdateCardEntity){
+        viewModelScope.launch {
+            updateCardUseCase.invoke(entity, id)
         }
     }
 

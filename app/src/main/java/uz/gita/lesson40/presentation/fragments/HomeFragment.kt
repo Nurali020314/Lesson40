@@ -131,7 +131,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
         adapter.setOnClickClickListener { index ->
             parentFragmentManager.beginTransaction().setReorderingAllowed(true).addToBackStack("HomeFragment")
-                .replace(R.id.container, RenameFragment::class.java, bundleOf("src" to R.drawable.card_back)).commit()
+                .replace(R.id.container, RenameFragment::class.java, bundleOf("src" to R.drawable.card_back,"id" to adapter.currentList[index].id,)).commit()
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
