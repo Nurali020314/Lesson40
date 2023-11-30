@@ -40,7 +40,7 @@
                     android:layout_height="36dp"
                     android:layout_gravity="center|end"
                     android:layout_marginEnd="8dp"
-                    android:src="@drawable/notifications"
+                    android:src="@drawable/alert_img"
                     android:tag="on"
 
                     />

@@ -17,6 +17,7 @@ import uz.gita.lesson40.data.constants.ErrorCodes
 import uz.gita.lesson40.databinding.FragmentAddCardBinding
 import uz.gita.lesson40.domain.entity.AddCardEntity
 import uz.gita.lesson40.presentation.CardViewModel
+import uz.gita.lesson40.presentation.adapter.CardAdapter
 
 @AndroidEntryPoint
 class AddCardFragment:Fragment(R.layout.fragment_add_card) {
@@ -27,6 +28,8 @@ class AddCardFragment:Fragment(R.layout.fragment_add_card) {
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         biding.apply {
+
+
             back.setOnClickListener {
                 requireActivity().onBackPressedDispatcher.onBackPressed()
             }
