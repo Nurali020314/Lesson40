@@ -66,4 +66,7 @@ interface AuthApi {
     suspend fun payVerify(@Header("Authorization") bearerToken :String, @Body transferVerifyEntity: TransferVerifyEntity) : Response<TransferVerifyResponse>
 
 
+    @POST("profile/update-password")
+    suspend fun updatePassword(@Header("Authorization") bearerToken :String) : Response<HistoryResponse>
+
 }

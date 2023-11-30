@@ -1,39 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:paddingTop="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:paddingTop="10dp">
+
     <FrameLayout
-        android:paddingHorizontal="10dp"
         android:layout_width="match_parent"
-        android:layout_height="36dp">
+        android:layout_height="36dp"
+        android:paddingHorizontal="10dp">
+
         <ImageView
+            android:id="@+id/back"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:id="@+id/back"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/back_24"/>
+            android:src="@drawable/back_24" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Services"
-            android:textColor="@color/black"
-            android:textSize="24sp"
             android:layout_gravity="center"
             android:fontFamily="@font/poppins"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="Services"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
     </FrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:paddingHorizontal="10dp"
         android:id="@+id/recycler"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        tools:listitem="@layout/payment_item"
-        app:spanCount="3"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="10dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        android:layout_weight="1"/>
+        app:spanCount="3"
+        tools:listitem="@layout/payment_item" />
 
 </LinearLayout>
