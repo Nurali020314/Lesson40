@@ -1,5 +1,7 @@
 package uz.gita.lesson40.presentation.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -27,6 +29,22 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
         }
 
 
+        binding.openTg.setOnClickListener {
+            openTelegramChat()
+        }
+
+
+    }
+    private fun openTelegramChat() {
+        val telegramChatUrl =
+            "https://t.me/Rasuljonov_Nurali" // Değiştirmeniz gereken yer: ChatUsername
+
+        val telegramIntent = Intent(Intent.ACTION_VIEW, Uri.parse(telegramChatUrl))
+        if (telegramIntent.resolveActivity(requireContext().packageManager) != null) {
+            startActivity(telegramIntent)
+        } else {
+            // Telegram uygulaması yüklü değilse veya bir hata oluşursa buraya kod ekleyebilirsiniz
+        }
     }
 
 }
