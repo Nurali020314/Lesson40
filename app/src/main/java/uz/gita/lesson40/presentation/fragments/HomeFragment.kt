@@ -40,6 +40,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        databaseViewModel.getAllCards()
+        databaseViewModel.livedataCards.observe(viewLifecycleOwner){data ->
+            if (!data.isNullOrEmpty())
+                adapter.submitList(data)
+        }
         val snapHelper: SnapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(binding.recycler)
         bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
@@ -118,6 +123,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.openSuccesFlow.collect { data ->
                 binding.swipe.isRefreshing = false
+                databaseViewModel.insertCards(data)
                 dataList.clear()
                 dataList.addAll(data)
                 adapter.submitList(dataList)
